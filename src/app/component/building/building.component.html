@@ -1,5 +1,37 @@
-<div class="row justify-content-center">
-    <button type="button" *ngFor="let edif of edificios" class="box btn col-md-2 mx-3 my-2">
-        {{edif}}
-    </button>
+<div class = "background">
+    <div class="overlay">
+
+    </div>
 </div>
+<div class="introduction-box">
+
+</div>
+
+<div class="container-fluid">
+    <div class="row col-md-12 mx-auto justify-content-between align-items-center">
+        <button type="button" class="btn back-btn" 
+        (click)="onBack()"
+        [ngClass]="{
+            'visible': courses == true,
+            'invisible': courses == false
+        }">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <h1 class="title">
+            {{title}}
+        </h1>
+
+        <div></div>
+    </div>
+    <div class="row col-md-12 mx-auto justify-content-center content">
+        <button type="button" 
+        *ngFor="let data of data" 
+        id = "{{data}}"
+        class="box btn col-md-2 mx-3 my-2"
+        (click)="onClick($event)">
+            {{data}}
+        </button>
+    </div>
+</div>
+

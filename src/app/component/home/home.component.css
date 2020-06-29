@@ -1,5 +1,15 @@
-.navbar-link{
+.navbar-link,
+.navbar-toggler-icon{
     color: red;
     font-size: 25px;
+}
+
+.navbar{
+    background-color: #F5F5F5;
+    /* background-color: transparent; */
+    /* background-color: rgba(0, 0, 0, 0.5); */
+
+    
+
 }
 

@@ -10,6 +10,7 @@ import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
 import { CoursesComponent } from './component/courses/courses.component';
 import { BuildingComponent } from './component/building/building.component';
+import { ReservationComponent } from './component/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BuildingComponent } from './component/building/building.component';
     LoginComponent,
     HomeComponent,
     CoursesComponent,
-    BuildingComponent
+    BuildingComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
