@@ -2,12 +2,12 @@
     <div style="height: 100vh;" class="row justify-content-center align-items-center overlay">
         <div style="height: 300px; width: 400px;" class="row justify-content-center login-box">
 
-            <div style="background-color: red; height: 40px;" class="row col-12 
+            <div style="background-color: red; height: 40px;" class="row col-md-12 
             justify-content-center align-items-center">
                 <h3 style="color: white; font-size: 20px;"> Inicia Sesion</h3>
             </div>
 
-            <form class="col-10 offset-1" (ngSubmit)="onSumit()" [formGroup] = "form">
+            <form class="col-md-10 offset-1" (ngSubmit)="onSumit()" [formGroup] = "form">
 
                 <div class = "form-row mt-3">
                     <div class="input-group">
@@ -34,7 +34,7 @@
                 </div>
 
                 <button type="submit" style="background-color: red; color: white;" 
-                class="btn offset-4 col-4 mt-3" 
+                class="btn offset-sm-4 col-sm-4 mt-3" 
                 [disabled]="form.invalid">
                 Acceder
                 </button>
