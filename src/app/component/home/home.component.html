@@ -1,0 +1,22 @@
+<nav style="background-color: #F5F5F5;" class="navbar navbar-expand-lg sticky-top">
+  
+    <a class="navbar-brand" [routerLink]="['/login']">
+        <img src="../../../assets/images/logo-intec.svg" style="height: 80px;" class="ml-2">
+    </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#options" 
+  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class = "collapse navbar-collapse" id="options">
+      <div class = "navbar-nav ml-auto">
+            <a class="nav-item nav-link navbar-link" [routerLink]="['/home']" 
+            [routerLinkActive] = "['activo']" >
+                Home
+            </a>
+      </div>   
+  </div>
+</nav>
+
+
