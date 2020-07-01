@@ -37,7 +37,7 @@
     color: white;
     font-size: 50px;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
     border-radius: 10px;
 }
 
@@ -52,4 +52,5 @@
 .back-btn:hover{
     background-color: white;
     color: red;
+    transform: scale(1.03);
 }
