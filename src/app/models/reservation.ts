@@ -1,14 +1,17 @@
+import { interval } from 'rxjs';
+
 export class Reservation{
     
     public day:string;
     public limit:number;
     public counterHours:number;
-    public intervals:Array<interval>;
+    public intervals:interval;
 
     constructor(day:string, limit:number, counterHours:number){
         this.day = day;
         this.limit = limit;
         this.counterHours = counterHours;
+        this.intervals = {iniTime: null, endTime: null};
     }
 }
 

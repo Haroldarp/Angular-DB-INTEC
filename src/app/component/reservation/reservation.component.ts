@@ -13,15 +13,16 @@ import * as $ from 'jquery';
 })
 export class ReservationComponent implements OnInit {
 
-  public counter:number;
-  public weekReservationIndex:number;
-
-  public weekCounter:number;
-  public reservations:Array<Reservation>;
-  public schedule:Array<Schedule>;
-  public days:Array<string>;
-  public hours:Array<number>;
   public course:string;
+
+  public currentReservationCounter:number;
+  public currentReservationDayIndex:number;
+
+  public currentWeek:number;
+
+  public hours:Array<number>;
+  public schedule:Array<Schedule>;
+  public reservations:Array<Reservation>;
 
 
   constructor(
@@ -37,9 +38,10 @@ export class ReservationComponent implements OnInit {
         this.course = params.course;
     });
 
-    this.counter = 0;
-    this.weekReservationIndex = null;
-    this.weekCounter = 1;
+    this.currentReservationCounter = 0;
+    this.currentReservationDayIndex = null;
+
+    this.currentWeek = 1;
     
 
     this.hours = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
@@ -61,17 +63,18 @@ export class ReservationComponent implements OnInit {
       new Reservation("Jueves",2,0),
       new Reservation("Viernes",2,0),
       new Reservation("Sabado",2,0),
-      new Reservation("Domingo",2,0),
+      new Reservation("Domingo",10,0),
     ]
+
 
   }
 
   onArrowClick(event:any){
-    if(event.currentTarget.id == 'left' && this.weekCounter > 1){
-      this.weekCounter--;
+    if(event.currentTarget.id == 'left' && this.currentWeek > 1){
+      this.currentWeek--;
 
-    }else if(event.currentTarget.id == 'right' && this.weekCounter < 12){
-      this.weekCounter++;
+    }else if(event.currentTarget.id == 'right' && this.currentWeek < 12){
+      this.currentWeek++;
 
     }
   }
@@ -79,20 +82,44 @@ export class ReservationComponent implements OnInit {
   onFreeClick(event:any){
     var div = event.currentTarget;
 
-    if(this.counter == 0){
-      this.weekReservationIndex = this._reservationService.getIndex(div.id);
+    if(this.currentReservationCounter == 0){
+      this.currentReservationDayIndex = this._reservationService.getDayIndex(div.id);
     }
 
     if(div.classList.contains('free')){
-      console.log(this._reservationService.verify(this.reservations,div.id,this.weekReservationIndex));
-      $(div).addClass('reserving').removeClass('free');
-      this.counter++;
+
+      var state = this._reservationService.addInterval(this.reservations,div.id,this.currentReservationDayIndex);
+
+      if(state.ok){
+        $(div).addClass('reserving').removeClass('free');
+        this.currentReservationCounter++;
+
+      }else{
+        console.log(state.errorMessage);
+      }
 
     }else if(div.classList.contains('reserving')){
-      $(div).addClass('free').removeClass('reserving');
-      this.counter--;
+      var state = this._reservationService.removeInterval(this.reservations,div.id,this.currentReservationDayIndex);
+
+      if(state.removeCode == 0){
+        $(div).addClass('free').removeClass('reserving');
+        this.currentReservationCounter--;
+
+      }else if(state.removeCode == 1){
+
+        var day;
+
+        for (let i = state.hour ; i <= 21; i++) {
+          day = this.reservations[this.currentReservationDayIndex].day;
+          $("#"+day+"-"+i).addClass('free').removeClass('reserving');
+        }
+
+      }
     
     }
+
+    console.log(this.reservations);
+
 
   }
 
