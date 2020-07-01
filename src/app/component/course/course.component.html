@@ -1,32 +1,16 @@
-<div class = "background">
-    <div class="overlay">
-
-    </div>
-</div>
-<div class="introduction-box">
-
-</div>
-
 <div class="container-fluid">
     <div class="row col-md-12 mx-auto justify-content-center align-items-center">
-        
         <h1 class="title">
-            {{title}}
+            {{building}}
         </h1>
-
     </div>
-
     <div class="row col-md-12 mx-auto justify-content-center content">
-       
         <button type="button" 
-        *ngFor="let edificio of edificios" 
-        id = "{{edificio}}"
+        *ngFor="let course of courses" 
+        id = "{{course}}"
         class="box btn col-md-2 mx-3 my-2"
         (click)="onClick($event)">
-            {{edificio}}
+            {{course}}
         </button>
-
     </div>
-
 </div>
-

@@ -12,41 +12,22 @@ export class BuildingComponent implements OnInit {
   public cursos:Array<string>;
   public data:Array<string>;
   public title:string;
-  public courses:boolean;
 
   constructor(
     private _router: Router
   ) { }
 
   ngOnInit(): void {
-    this.courses = false;
     this.title = 'Edificos';
     this.edificios = ['FD','HR','GC','FD','HR','GC','FD','HR','GC','FD','HR','GC'];
     this.data = [];
 
-    this.cargarEdificio();
-    console.log(this.data);
   }
 
   onClick(event:any){
 
     console.log(event.target.id);
-    
-    if(!this.courses){
-      this.courses = !this.courses;
-      this.title = event.currentTarget.id;
-      //se cargan los cursos de ese edificio
-
-    }else{
-      this._router.navigate([`home/reserva/${event.currentTarget.id}`]);
-      //se carga el horario
-    }
-  }
-
-  onBack(){
-    this.courses = !this.courses;
-    this.title = 'Edificos';
-    //se cargan los edificios
+    this._router.navigate([`home/curso/${event.currentTarget.id}`]);
   }
 
   cargarEdificio(){
