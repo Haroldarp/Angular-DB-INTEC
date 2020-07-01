@@ -1,3 +1,49 @@
 <div class="container-fluid">
-    <div class="row "></div>
+    <div class="row col-md-10 offset-md-1 justify-content-center mb-5">
+        <div class="row col-md-12 justify-content-center mt-2 mb-4">
+            <h3>{{course}}</h3>
+        </div>
+        <div class="row col-md-12 justify-content-between align-items-center" 
+        style="background-color: red;">
+            <button id="left" type="button" class="btn arrow" (click)="onArrowClick($event)">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h3 style="color: white; font-size: 20px;">semana {{weekCounter}}</h3>
+            <button id="right" type="button" class="btn arrow" (click)="onArrowClick($event)">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        
+        <div class="row col-md-12 px-0">
+
+            <div class="d-flex flex-column col-md-1 px-0 schedule-hours">
+                <div class="schedule-content schedule-header"> </div>
+                <div class="d-flex justify-content-center align-items-center schedule-content"
+                *ngFor="let hour of hours">
+                    {{hour}}:00
+                </div>
+            </div>
+
+            <div class="d-flex flex-column col-md px-0"
+            *ngFor="let items of schedule">
+
+                <div class="d-flex justify-content-center align-items-center schedule-header schedule-content">
+                    {{items.day}}
+                </div>
+
+                <div id="{{items.day}}-{{hours[indice]}}"
+                class="d-flex justify-content-center schedule-content"
+                *ngFor="let item of items.state; let indice = index"
+                (click)= "onFreeClick($event)"
+                [ngClass]="{
+                    'free': item == 0,
+                    'class': item == 1,
+                    'reserved': item == 2
+                }">
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

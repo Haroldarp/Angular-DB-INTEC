@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
-import { CoursesComponent } from './component/courses/courses.component';
 import { BuildingComponent } from './component/building/building.component';
 import { ReservationComponent } from './component/reservation/reservation.component';
 
@@ -17,7 +16,6 @@ import { ReservationComponent } from './component/reservation/reservation.compon
     AppComponent,
     LoginComponent,
     HomeComponent,
-    CoursesComponent,
     BuildingComponent,
     ReservationComponent
   ],

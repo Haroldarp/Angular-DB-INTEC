@@ -11,12 +11,12 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
-    height: 110vh;
+    height: 700px;
     position: relative;
 }
 
 .introduction-box{
-    height: 110vh;
+    height: 700px;
     background-color: red;
 }
 

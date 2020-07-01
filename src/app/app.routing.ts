@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './component/login/login.component';
 import {HomeComponent} from './component/home/home.component';
 import {BuildingComponent} from './component/building/building.component';
-import {CoursesComponent} from './component/courses/courses.component';
 import {ReservationComponent} from './component/reservation/reservation.component';
 
 
@@ -20,8 +19,7 @@ const appRoutes: Routes = [
   [
     {path:'', redirectTo: '/home/edificios', pathMatch: 'full'},
     {path:'edificios', component:BuildingComponent},
-    {path:'cursos', component:CoursesComponent},
-    {path:'reserva', component:ReservationComponent}
+    {path:'reserva/:course', component:ReservationComponent}
   ]},
 
   {path:'login', component:LoginComponent},

@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-building',
@@ -13,7 +14,9 @@ export class BuildingComponent implements OnInit {
   public title:string;
   public courses:boolean;
 
-  constructor() { }
+  constructor(
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
     this.courses = false;
@@ -31,10 +34,11 @@ export class BuildingComponent implements OnInit {
     
     if(!this.courses){
       this.courses = !this.courses;
-      this.title = event.target.id;
+      this.title = event.currentTarget.id;
       //se cargan los cursos de ese edificio
 
     }else{
+      this._router.navigate([`home/reserva/${event.currentTarget.id}`]);
       //se carga el horario
     }
   }

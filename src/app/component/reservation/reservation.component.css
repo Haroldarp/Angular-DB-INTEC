@@ -1,0 +1,44 @@
+.arrow,
+.schedule-header,
+.schedule-hours{
+    color: white;
+    font-size: 20px;
+    background-color: red;
+}
+
+.schedule-content{
+    height: 50px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.schedule-hours{
+    border-left: 1px solid black;
+}
+
+.schedule-header{
+    border-top: 1px solid black;
+}
+
+.free{
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.free:hover{
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.reserving{
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.class{
+    background-color: #e57373;
+}
+
+.reserved{
+    background-color: #64B5F6;
+}
