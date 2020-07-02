@@ -1,32 +1,31 @@
-<div class = "background">
-    <div class="overlay">
-
+<div class="background">
+    <div class="container-fluid">
+        <div class="row col-md-12 mx-auto justify-content-center align-items-center">
+            
+            <h1 class="title">
+                {{title}}
+            </h1>
+    
+        </div>
+    
+        <div class="row col-md-12 mx-auto justify-content-center content">
+    
+            <div class="card col-md-2 mx-3 my-2 px-1 pt-1 card-custom"
+            *ngFor="let edificio of edificios" 
+            id = "{{edificio}}"
+            (click)="onClick($event)">
+                <img class="card-img-top img-fluid" src="../../../assets/images/NotFound.png">
+                <div class="card-body card-body-custom my-1 d-flex flex-column 
+                justify-content-center align-items-center">
+                    <h3 class="card-title">
+                        {{edificio}}
+                    </h3>
+                    sdhsabidsa dbsiudbas isdba
+                </div>
+            </div>
+    
+        </div>
+    
     </div>
-</div>
-<div class="introduction-box">
-
-</div>
-
-<div class="container-fluid">
-    <div class="row col-md-12 mx-auto justify-content-center align-items-center">
-        
-        <h1 class="title">
-            {{title}}
-        </h1>
-
-    </div>
-
-    <div class="row col-md-12 mx-auto justify-content-center content">
-       
-        <button type="button" 
-        *ngFor="let edificio of edificios" 
-        id = "{{edificio}}"
-        class="box btn col-md-2 mx-3 my-2"
-        (click)="onClick($event)">
-            {{edificio}}
-        </button>
-
-    </div>
-
 </div>
 

@@ -11,6 +11,7 @@ import { HomeComponent } from './component/home/home.component';
 import { BuildingComponent } from './component/building/building.component';
 import { ReservationComponent } from './component/reservation/reservation.component';
 import { CourseComponent } from './component/course/course.component';
+import { HomePageComponent } from './component/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CourseComponent } from './component/course/course.component';
     HomeComponent,
     BuildingComponent,
     ReservationComponent,
-    CourseComponent
+    CourseComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

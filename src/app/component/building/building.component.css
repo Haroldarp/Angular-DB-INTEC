@@ -1,25 +1,6 @@
-.overlay {
-    background-color: rgba(0, 0, 0, 0.2);
-    height: 100%;
-    width: 100%;
-}
-
-
 .background{
-    background-image:  url("../../../assets/images/books.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    height: 700px;
-    position: relative;
+    background-color: #F8F9FA;
 }
-
-.introduction-box{
-    height: 700px;
-    background-color: red;
-}
-
 
 .title{
     font-size: 100px;
@@ -29,20 +10,31 @@
     height: 100vh;
 }
 
-.box{
-    box-shadow: 0.5px 0.5px 2.5px 2.5px #C9C9C9;
-    height: 200px;
+.card-image-custom{
+    width: 100%;
+    
+}
+
+.card-custom{
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+}
+
+.card-custom:hover{
+    transform: scale(1.03);
+    cursor: pointer;
+
+}
+
+.card-body-custom{
     background-color: red;
     color: white;
-    font-size: 50px;
-    font-weight: bold;
-    transition: all 0.3s;
-    border-radius: 10px;
+    border-radius: 3px;
+    transition: all 0.5s;
 }
 
-
-.box:hover{
+.card-custom:hover  > .card-body-custom{
     background-color: white;
-    color: red;
-    transform: scale(1.03);
+    color: red;   
 }
+

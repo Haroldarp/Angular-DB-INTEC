@@ -1,9 +1,11 @@
 
 .schedule{
-    box-shadow: 0.5px 0.5px 2.5px 2.5px #C9C9C9;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    /* box-shadow: 0.5px 0.5px 2.5px 2.5px #C9C9C9; */
 }
 
 .arrow,
+.weekTitle,
 .schedule-header,
 .schedule-hours{
     color: white;
@@ -13,22 +15,32 @@
 
 .schedule-content{
     height: 50px;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
+    border-bottom: 1px solid #F7F3F7;
+    border-right: 1px solid #F7F3F7;
 }
 
 .schedule-hours{
-    border-left: 1px solid black;
+    border-left: 1px solid #F7F3F7;
 }
 
 .schedule-header{
-    border-top: 1px solid black;
+    border-top: 1px solid #F7F3F7;
+}
+
+.free,
+.reserved,
+.class{
+    width: 90%;
+    height: 80%;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    /* box-shadow: 0.5px 0.5px 2.5px 2.5px #C9C9C9; */
+    transition: all 0.3s;
+
 }
 
 .free{
     background-color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .free:hover{
@@ -38,6 +50,10 @@
 .reserving{
     background-color: rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    box-shadow: none;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
 }
 
 .class{
@@ -46,4 +62,9 @@
 
 .reserved{
     background-color: #64B5F6;
+}
+
+.btn-custom{
+    background-color: red;
+    color: white;
 }

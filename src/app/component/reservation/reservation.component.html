@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div class="row col-md-12 justify-content-center mt-2 mb-4">
-        <h3>{{course}}</h3>
+    <div class="row col-md-12 justify-content-center mt-2 mb-4 mx-0">
+        <h3 class="text-uppercase">{{course}}</h3>
     </div>
     <div class="row col-md-10 offset-md-1 justify-content-center mb-5 px-0 schedule">
 
@@ -10,7 +10,7 @@
             <button id="left" type="button" class="btn arrow" (click)="onArrowClick($event)">
                 <i class="fas fa-arrow-left"></i>
             </button>
-            <h3 style="color: white; font-size: 20px;">semana {{currentWeek}}</h3>
+            <h3 class="text-uppercase weekTitle">semana {{currentWeek}}</h3>
             <button id="right" type="button" class="btn arrow" (click)="onArrowClick($event)">
                 <i class="fas fa-arrow-right"></i>
             </button>
@@ -35,15 +35,17 @@
                     {{items.day}}
                 </div>
 
-                <div id="{{items.day}}-{{hours[indice]}}"
-                class="d-flex justify-content-center schedule-content"
-                *ngFor="let item of items.state; let indice = index"
-                (click)= "onFreeClick($event)"
-                [ngClass]="{
-                    'free': item == 0,
-                    'class': item == 1,
-                    'reserved': item == 2
-                }">
+                <div class="d-flex justify-content-center align-items-center  schedule-content"
+                *ngFor="let item of items.state; let indice = index">
+
+                    <div id="{{items.day}}-{{hours[indice]}}"
+                    (click)= "onFreeClick($event)"
+                     [ngClass]="{
+                        'free': item == 0,
+                        'class': item == 1,
+                        'reserved': item == 2}">
+                    </div>
+
                 </div>
             </div>
 
@@ -51,3 +53,29 @@
 
     </div>
 </div>
+<!-- <button type="button" data-toggle="modal" data-target="#WarningModal">Launch modal</button> -->
+
+<!--Warning Modal -->
+<div id="WarningModal" class="modal fade" id="WarningModal" tabindex="-1" role="dialog" 
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">AVISO!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          {{modalErrorMessage}}
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-custom" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

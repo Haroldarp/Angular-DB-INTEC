@@ -1,13 +1,13 @@
 <div class="container-fluid background">
     <div style="height: 100vh;" class="row justify-content-center align-items-center overlay">
-        <div style="height: 300px; width: 400px;" class="row justify-content-center login-box">
+        <div style="height: 300px" class="row justify-content-center login-box">
 
             <div style="background-color: red; height: 40px;" class="row col-md-12 
             justify-content-center align-items-center">
                 <h3 style="color: white; font-size: 20px;"> Inicia Sesion</h3>
             </div>
 
-            <form class="col-md-10" (ngSubmit)="onSumit()" [formGroup] = "form">
+            <form novalidate class="col-md-10" (ngSubmit)="onSumit()" [formGroup] = "form">
 
                 <div class = "form-row mt-3">
                     <div class="input-group">
@@ -19,6 +19,12 @@
                         <input type="text" class="form-control" id="username" 
                         placeholder="username" formControlName= "username">
                     </div>
+                </div>
+
+                <div *ngIf= "form.get('username').errors?.required && 
+                (form.get('username').dirty || form.get('username').touched)" 
+                class="row justify-content-center error">
+                    El ususario es obligatorio
                 </div>
                 
                 <div class = "form-row mt-3">
@@ -33,13 +39,25 @@
                     </div>
                 </div>
 
+                <div *ngIf= "form.get('password').errors?.required && 
+                (form.get('password').dirty || form.get('password').touched)" 
+                class="row justify-content-center error">
+                    La contraseña es obligatorio
+                </div>
+
+                <div *ngIf= "!validUser" class="row justify-content-center error">
+                    El ususario o la contraseña son incorrectos
+                </div>
+
                 <button type="submit" style="background-color: red; color: white;" 
-                class="btn offset-sm-4 col-sm-4 mt-3" 
-                [disabled]="form.invalid">
+                class="btn offset-sm-4 col-sm-4 mt-3">
                 Acceder
                 </button>
             </form>
         </div>
     </div>
 </div>
+
+ 
+                <!-- [disabled]="form.invalid" -->
 

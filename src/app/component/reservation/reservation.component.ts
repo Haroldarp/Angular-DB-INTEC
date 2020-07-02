@@ -24,6 +24,7 @@ export class ReservationComponent implements OnInit {
   public schedule:Array<Schedule>;
   public reservations:Array<Reservation>;
 
+  public modalErrorMessage:string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -95,7 +96,8 @@ export class ReservationComponent implements OnInit {
         this.currentReservationCounter++;
 
       }else{
-        console.log(state.errorMessage);
+        this.modalErrorMessage = state.errorMessage;
+        // $("#WarningModal").modal('show');
       }
 
     }else if(div.classList.contains('reserving')){
@@ -111,7 +113,7 @@ export class ReservationComponent implements OnInit {
 
         for (let i = state.hour ; i <= 21; i++) {
           day = this.reservations[this.currentReservationDayIndex].day;
-          $("#"+day+"-"+i).addClass('free').removeClass('reserving');
+          $(`#${day}-${i}`).addClass('free').removeClass('reserving');
         }
 
       }

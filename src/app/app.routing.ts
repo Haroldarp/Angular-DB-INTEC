@@ -7,11 +7,12 @@ import {HomeComponent} from './component/home/home.component';
 import {BuildingComponent} from './component/building/building.component';
 import {ReservationComponent} from './component/reservation/reservation.component';
 import { CourseComponent } from './component/course/course.component';
-
+import { HomePageComponent } from './component/home-page/home-page.component';
 
 
 
 const appRoutes: Routes = [
+  {path:'', component:HomePageComponent},
   {path:'home', component:HomeComponent, children:
   [
     {path:'', redirectTo: '/home/edificios', pathMatch: 'full'},
