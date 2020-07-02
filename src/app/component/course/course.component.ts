@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 
@@ -9,21 +9,14 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class CourseComponent implements OnInit {
 
-  public building:string;
-
-  public courses:Array<string>;
+  @Input() building:string;
+  @Input() courses:Array<string>;
 
   constructor(
-    private _route: ActivatedRoute,
     private _router: Router
   ) { }
 
   ngOnInit(): void {
-    this._route.params.subscribe((params:Params)=>{
-      this.building = params.building;
-    });
-
-    this.courses = ['FD301','HR302','GC215','FD105','HR303','GC115','FD205','HR311'];
 
   }
 

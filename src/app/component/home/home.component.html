@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   
-    <a class="navbar-brand" [routerLink]="['/login']">
+    <a class="navbar-brand" [routerLink]="['/home/edificios']">
         <img src="../../../assets/images/logo-intec.svg" style="height: 70px;" class="ml-2">
     </a>
 
@@ -11,6 +11,12 @@
 
   <div class = "collapse navbar-collapse" id="options">
       <div class = "navbar-nav ml-auto">
+            <a class="nav-item nav-link mr-3 btn-custom" [routerLink]="['/home/disponible-ahora']" >
+                Disponibles ahora
+            </a>
+            <a class="nav-item nav-link mr-3 btn-custom" [routerLink]="['/home/disponible-ahora']" >
+                Mis Reservas
+            </a>
             <a class="nav-item nav-link navbar-link" [routerLink]="['/login']" >
                 <i class="fas fa-sign-out-alt"></i>
             </a>

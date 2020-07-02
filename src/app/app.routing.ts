@@ -8,6 +8,9 @@ import {BuildingComponent} from './component/building/building.component';
 import {ReservationComponent} from './component/reservation/reservation.component';
 import { CourseComponent } from './component/course/course.component';
 import { HomePageComponent } from './component/home-page/home-page.component';
+import { CoursesViewComponent } from './component/courses-view/courses-view.component';
+import { AvailableNowComponent } from './component/available-now/available-now.component';
+
 
 
 
@@ -16,8 +19,9 @@ const appRoutes: Routes = [
   {path:'home', component:HomeComponent, children:
   [
     {path:'', redirectTo: '/home/edificios', pathMatch: 'full'},
+    {path:'disponible-ahora', component:AvailableNowComponent},
     {path:'edificios', component:BuildingComponent},
-    {path:'curso/:building', component:CourseComponent},
+    {path:'curso/:building', component:CoursesViewComponent},
     {path:'reserva/:course', component:ReservationComponent}
   ]},
 
