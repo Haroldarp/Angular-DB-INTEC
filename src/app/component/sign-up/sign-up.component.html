@@ -1,0 +1,87 @@
+<div class="container-fluid background">
+    <div style="height: 100vh;" class="row justify-content-center align-items-center overlay">
+        <div class="row col-md-3 px-0 pb-3 justify-content-center login-box">
+
+            <div style="background-color: red; height: 40px;" class="row col-md-12 
+            justify-content-center align-items-center">
+                <h3 style="color: white; font-size: 20px;">Registrar</h3>
+            </div>
+
+
+            <form novalidate class="col-md-10 justify-content-center" (ngSubmit)="onSumit()" [formGroup] = "form">
+
+                <div class = "form-row mt-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="usernamePrepend">
+                            <i class="fas fa-user"></i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control" id="username" 
+                        placeholder="Matricula" formControlName= "username">
+                    </div>
+                </div>
+
+                <div *ngIf= "form.get('username').dirty || form.get('username').touched" 
+                class="row justify-content-center text-center error">
+                    
+                    <div *ngIf = "form.get('username').errors?.required">
+                        La Matricula es obligatorio
+                    </div>
+
+                </div>
+                
+                <div class = "form-row mt-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="passwordPrepend">
+                            <i class="fas fa-lock"></i>
+                          </span>
+                        </div>
+                        <input type="password" class="form-control" id="password" 
+                        placeholder="Password" formControlName= "password">
+                    </div>
+                </div>
+
+                <div class = "form-row mt-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="passwordPrepend">
+                            <i class="fas fa-lock"></i>
+                          </span>
+                        </div>
+                        <input type="password" class="form-control" id="comfirmPassword" 
+                        placeholder="Confirm Password" formControlName= "comfirmPassword">
+                    </div>
+                </div>
+
+                <div *ngIf= "(form.get('password').dirty || form.get('password').touched)
+                && (form.get('comfirmPassword').dirty || form.get('comfirmPassword').touched)" 
+                class="row justify-content-center text-center error">
+                    
+                    <div *ngIf = "form.get('password').errors?.required || 
+                    form.get('comfirmPassword').errors?.required">
+                        Las contraseñas son requeridas
+                    </div>
+
+                    <div *ngIf = "form.errors?.EqualPassword">
+                        Las contraseñas no coninciden
+                    </div>
+
+                </div>
+                
+                <div class = "form-row mt-3 justify-content-center">
+                    <button type="submit" style="background-color: red; color: white;" 
+                    class="btn">
+                        Registrar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+ 
+                <!-- [disabled]="form.invalid" -->
+

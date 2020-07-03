@@ -35,11 +35,8 @@ export class LoginComponent implements OnInit {
   onSumit(){
     if(this.form.valid){
       this._router.navigate([`home/edificios`]);
-      
-    }else if( !this.form.get('username').value || !this.form.get('password').value){
-      return;
-      
-    }else{
+
+   }else if(this.form.errors?.validUser){
       this.validUser = false;
       console.log('no valido');
     }

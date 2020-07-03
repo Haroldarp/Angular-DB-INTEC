@@ -1,0 +1,21 @@
+.background{
+    position: fixed;
+    background-image:  url("../../../assets/images/Intec.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.login-box{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.overlay {
+    background-color: rgba(0,0,0,0.3);
+}
+
+.error{
+    font-weight: bold;
+    color: red;
+}

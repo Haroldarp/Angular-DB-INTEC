@@ -10,6 +10,7 @@ import { CourseComponent } from './component/course/course.component';
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { CoursesViewComponent } from './component/courses-view/courses-view.component';
 import { AvailableNowComponent } from './component/available-now/available-now.component';
+import { SignUpComponent } from './component/sign-up/sign-up.component';
 
 
 
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
   ]},
 
   {path:'login', component:LoginComponent},
+  {path:'sign-up', component:SignUpComponent},
   {path:'**', component: LoginComponent}
 ];
 

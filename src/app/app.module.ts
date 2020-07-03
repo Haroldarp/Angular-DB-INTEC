@@ -14,6 +14,7 @@ import { CourseComponent } from './component/course/course.component';
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { CoursesViewComponent } from './component/courses-view/courses-view.component';
 import { AvailableNowComponent } from './component/available-now/available-now.component';
+import { SignUpComponent } from './component/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AvailableNowComponent } from './component/available-now/available-now.c
     CourseComponent,
     HomePageComponent,
     CoursesViewComponent,
-    AvailableNowComponent
+    AvailableNowComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
