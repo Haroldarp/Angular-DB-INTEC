@@ -14,9 +14,9 @@
             *ngFor="let edificio of edificios" 
             id = "{{edificio}}"
             (click)="onClick($event)">
-                <img class="card-img-top img-fluid" src="../../../assets/images/NotFound.png">
+                <img class="card-img-top img-fluid" src="../../../assets/images/{{edificio}}.jpg">
                 <div class="card-body card-body-custom my-1 d-flex flex-column 
-                justify-content-center align-items-center">
+                justify-content-center align-items-center text-center">
                     <h3 class="card-title">
                         {{edificio}}
                     </h3>

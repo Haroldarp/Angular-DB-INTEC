@@ -19,7 +19,7 @@ export class BuildingComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = 'Edificos';
-    this.edificios = ['FD','HR','GC','FD','HR','GC','FD','HR','GC','FD','HR','GC'];
+    this.edificios = ['FD','DP','GC','EL','AJ','AH','ER','PB','EP'];
     this.data = [];
 
   }

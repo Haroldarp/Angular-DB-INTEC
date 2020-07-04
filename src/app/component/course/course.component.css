@@ -20,6 +20,7 @@
 
 .overlay{
     background-color: rgba(0,0,0,0.3);
+    position: absolute;
 
 }
 
@@ -29,5 +30,9 @@
 
 .img-custom{
     height: 120px;
-    background-color: red;
+    position: relative;
+}
+
+.img{
+    object-fit: cover;
 }
