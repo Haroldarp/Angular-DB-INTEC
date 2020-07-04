@@ -11,6 +11,8 @@ import { HomePageComponent } from './component/home-page/home-page.component';
 import { CoursesViewComponent } from './component/courses-view/courses-view.component';
 import { AvailableNowComponent } from './component/available-now/available-now.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
+import { MyReservationComponent } from './component/my-reservation/my-reservation.component';
+import { ReservationCardsComponent } from './component/reservation-cards/reservation-cards.component';
 
 
 
@@ -23,7 +25,9 @@ const appRoutes: Routes = [
     {path:'disponible-ahora', component:AvailableNowComponent},
     {path:'edificios', component:BuildingComponent},
     {path:'curso/:building', component:CoursesViewComponent},
-    {path:'reserva/:course', component:ReservationComponent}
+    {path:'reserva/:course', component:ReservationComponent},
+    {path:'my-reservation', component:MyReservationComponent},
+    {path:'reservation-cards', component:ReservationCardsComponent},
   ]},
 
   {path:'login', component:LoginComponent},

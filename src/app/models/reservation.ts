@@ -1,5 +1,3 @@
-import { interval } from 'rxjs';
-
 export class Reservation{
     
     public day:string;

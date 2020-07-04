@@ -15,6 +15,8 @@ import { HomePageComponent } from './component/home-page/home-page.component';
 import { CoursesViewComponent } from './component/courses-view/courses-view.component';
 import { AvailableNowComponent } from './component/available-now/available-now.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
+import { MyReservationComponent } from './component/my-reservation/my-reservation.component';
+import { ReservationCardsComponent } from './component/reservation-cards/reservation-cards.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
     HomePageComponent,
     CoursesViewComponent,
     AvailableNowComponent,
-    SignUpComponent
+    SignUpComponent,
+    MyReservationComponent,
+    ReservationCardsComponent
   ],
   imports: [
     BrowserModule,

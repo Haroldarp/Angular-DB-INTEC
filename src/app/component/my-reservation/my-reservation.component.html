@@ -1,0 +1,31 @@
+<div>
+    <div class="container-fluid">
+        <div class="row col-md-12 justify-content-center">
+            <h3 class="text-center ml-3">Mis Reservas</h3>
+        </div>
+        <div *ngFor = "let bulding of myReservations" >
+            <div class="row col-md-12">
+                <h3 class="text-center ml-3">{{bulding.code}}</h3>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <app-reservation-cards *ngFor = "let reservation of bulding.reservations" 
+                [reservationInfo]="reservation"></app-reservation-cards>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row col-md-12 justify-content-center">
+            <h3 class="text-center ml-3">Grupos a los que pertenezco</h3>
+        </div>
+        <div *ngFor = "let bulding of myGroups" >
+            <div class="row col-md-12">
+                <h3 class="text-center ml-3">{{bulding.code}}</h3>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <app-reservation-cards *ngFor = "let reservation of bulding.reservations" 
+                [reservationInfo]="reservation"></app-reservation-cards>
+            </div>
+        </div>
+    </div>
+</div>

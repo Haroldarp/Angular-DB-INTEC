@@ -1,0 +1,23 @@
+.card-custom{
+    box-shadow: 0 0 5px rgba(10, 10, 10, 0.3);
+}
+
+.card-custom:hover{
+    cursor: pointer;
+
+}
+
+.course-title{
+    color: red;
+}
+
+.trash-icon{
+    transition: all 0.3s;
+    color: red;
+    position: absolute;
+    right: 0;
+}
+
+.trash-icon:hover{
+    transform: scale(1.1);
+}
