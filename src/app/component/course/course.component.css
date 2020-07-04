@@ -3,10 +3,12 @@
     height: 200px;
     background-color: red;
     color: white;
-    font-size: 50px;
+    font-size: 25px;
     font-weight: bold;
     transition: all 0.3s;
     border-radius: 10px;
+    height: 125px;
+    width: 250px;
 }
 
 
@@ -14,4 +16,18 @@
     background-color: white;
     color: red;
     transform: scale(1.03);
+}
+
+.overlay{
+    background-color: rgba(0,0,0,0.3);
+
+}
+
+.title{
+    color: white;
+}
+
+.img-custom{
+    height: 120px;
+    background-color: red;
 }

@@ -18,6 +18,7 @@
 .card-custom{
     transition: all 0.3s;
     box-shadow: 0 0 5px rgba(10, 10, 10, 0.3);
+    width: 225px;
 }
 
 .card-custom:hover{

@@ -1,5 +1,6 @@
 .card-custom{
     box-shadow: 0 0 5px rgba(10, 10, 10, 0.3);
+    width: 300px;
 }
 
 .card-custom:hover{
