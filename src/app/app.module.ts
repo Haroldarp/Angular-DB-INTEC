@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {routing, appRoutingProviders} from "./app.routing";
 import {HttpClientModule} from '@angular/common/http'
 import {ReactiveFormsModule} from '@angular/forms'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +39,8 @@ import { ReservationCardsComponent } from './component/reservation-cards/reserva
     AppRoutingModule,
     HttpClientModule,
     routing,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

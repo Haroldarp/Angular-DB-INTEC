@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Schedule} from '../../models/schedule';
 import {Reservation} from '../../models/reservation';
 import {ReservationService} from '../../services/reservation.service'
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
 
 @Component({
@@ -13,6 +14,8 @@ import * as $ from 'jquery';
 })
 export class ReservationComponent implements OnInit {
 
+  @ViewChild('errorModal') errorModal: ElementRef;
+
   public course:string;
 
   public currentReservationCounter:number;
@@ -22,13 +25,15 @@ export class ReservationComponent implements OnInit {
 
   public hours:Array<number>;
   public schedule:Array<Schedule>;
+
   public reservations:Array<Reservation>;
 
   public modalErrorMessage:string;
 
   constructor(
     private _route: ActivatedRoute,
-    private _reservationService: ReservationService
+    private _reservationService: ReservationService,
+    private _modalService: NgbModal
   ){
       window.scroll(0,0);
    }
@@ -96,8 +101,8 @@ export class ReservationComponent implements OnInit {
         this.currentReservationCounter++;
 
       }else{
-        this.modalErrorMessage = state.errorMessage;
-        // $("#WarningModal").modal('show');
+        console.log(state.errorMessage);
+        this.showErrorModal(this.errorModal,state.errorMessage);
       }
 
     }else if(div.classList.contains('reserving')){
@@ -122,7 +127,11 @@ export class ReservationComponent implements OnInit {
 
     console.log(this.reservations);
 
+  }
 
+  showErrorModal(modal, errorMessage){
+    this.modalErrorMessage = errorMessage;
+    this._modalService.open(modal, { centered: true });
   }
 
 }
