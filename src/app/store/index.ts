@@ -36,7 +36,7 @@ export const reducers = createReducer(
       user: state.user,
       error: action.error
     };
-  })
+  }),
 )
 
 

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl , FormGroup, FormBuilder, Validator, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserValidator} from '../../validators/login.validator'
+import {Store} from '@ngrx/store';
+import {userState} from '../../store/index';
+import * as userActions from '../../store/user-state.actions';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    private store:Store<userState>
+
     ) {
 
     this.form = formBuilder.group({

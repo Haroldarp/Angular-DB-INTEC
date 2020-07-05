@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {UserInfo} from '../models/userInfo';
+import {Reservation} from '../models/reservation';
 
 export const loadUser = createAction(
   '[User login] Load User'
