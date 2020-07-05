@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Reservation} from '../models/reservation';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ReservationService{
-
-    
 
     constructor(
     ){}
@@ -14,9 +12,9 @@ export class ReservationService{
 
         var intervalCode;
 
-        var date = code.split("-")[0];
+        var date = code.split("/")[0];
         var reservation = reservations[this.getDayIndex(currentDate)];
-        var hour = Number.parseInt( code.split("-")[1]);
+        var hour = Number.parseInt( code.split("/")[1]);
 
         if(date != currentDate)
             return {ok:false, errorMessage:'Las horas de la reservacion deben pertenece al mismo dia'};
@@ -51,7 +49,7 @@ export class ReservationService{
         if(verify.ok){
             
             var reservation = reservations[this.getDayIndex(currentDay)];
-            var hour = Number.parseInt( code.split("-")[1]);
+            var hour = Number.parseInt( code.split("/")[1]);
     
             if(verify.intervalCode == 0){
                 reservation.iniTime =  hour;
@@ -77,7 +75,7 @@ export class ReservationService{
     removeInterval(reservations:Array<Reservation>, code:string, currentDay:string):any{
     
         var reservation = reservations[this.getDayIndex(currentDay)];
-        var hour = Number.parseInt( code.split("-")[1]);
+        var hour = Number.parseInt( code.split("/")[1]);
         var removeCode;
 
         if(reservation.counterHours == 1){

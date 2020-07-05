@@ -38,7 +38,7 @@
                 <div class="d-flex justify-content-center align-items-center  schedule-content"
                 *ngFor="let item of items.state; let hourIndex = index">
 
-                    <div id="{{getDate(dayIndex,currentWeek)}}-{{hours[hourIndex]}}"
+                    <div id="{{getDate(dayIndex,currentWeek)}}/{{hours[hourIndex]}}"
                     (click)= "onFreeClick($event)"
                      [ngClass]="{
                         'free': item == 0,

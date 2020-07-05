@@ -90,7 +90,7 @@ export class ReservationComponent implements OnInit {
     var div = event.currentTarget;
 
     if(this.currentReservationCounter == 0){
-      this.currentReservationDay = div.id.split("-")[0];
+      this.currentReservationDay = div.id.split("/")[0];
     }
 
     if(div.classList.contains('free')){

@@ -19,6 +19,10 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { MyReservationComponent } from './component/my-reservation/my-reservation.component';
 import { ReservationCardsComponent } from './component/reservation-cards/reservation-cards.component';
 
+import {DateService} from './services/date.service';
+import {PeticionesService} from './services/peticiones.service';
+import {ReservationService} from './services/reservation.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +46,12 @@ import { ReservationCardsComponent } from './component/reservation-cards/reserva
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [appRoutingProviders],
+  providers: [
+    appRoutingProviders,
+    DateService,
+    PeticionesService,
+    ReservationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

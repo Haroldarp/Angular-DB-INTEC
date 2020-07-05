@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DateService{
 
 
@@ -31,7 +31,8 @@ export class DateService{
 
         }
 
-        return date.toDateString();
+        // return date.toDateString();
+        return `${date.getUTCFullYear()}-${date.getUTCMonth()+1}-${date.getUTCDate()}`;
         
         
     }

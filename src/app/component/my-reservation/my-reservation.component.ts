@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ReservationInfo} from '../../models/reservation-info';
 import {Reservation} from '../../models/reservation';
 
 
