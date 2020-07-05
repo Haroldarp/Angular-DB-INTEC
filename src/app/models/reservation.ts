@@ -1,5 +1,6 @@
 export interface Reservation{
-    
+
+    id?:number;
     limit?:number;
     building?:string;
     course?: string;

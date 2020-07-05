@@ -21,6 +21,16 @@ export class UserStateEffects {
     )
   );
 
+  loadReservations$ = createEffect(() => this.actions$.pipe(
+    ofType(userActions.loadReservations),
+    mergeMap(() => 
+    this._peticionesService.getReservations().pipe(
+        map(Reservations => userActions.loadReservationsSuccess({Reservations})),
+        catchError(error => of(userActions.loadReservationsFailure({error})))
+      ))
+    )
+  );
+
 
   constructor(private actions$: Actions, private _peticionesService:PeticionesService) {}
 

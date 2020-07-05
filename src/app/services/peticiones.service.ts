@@ -15,21 +15,27 @@ export class PeticionesService{
         this.url = "https://reqres.in/";
     }
 
-    getUser():Observable<UserInfo>{
-        let userInfo:UserInfo = {id: 1, limitHoursDay: 2, matricula: '1088464', name: 'Harold',
-        userReservations: [{iniTime: 7, endTime: 10},{iniTime: 11, endTime: 14,},{iniTime: 15, endTime: 20,}]}
+    getUser():Observable<UserInfo[]>{
+        let userInfo:UserInfo[] = 
+        [{id: 10, limitHoursDay: 2, matricula: '1088464', name: 'Harold',
+        userReservations: [{iniTime: 7, endTime: 10},{iniTime: 11, endTime: 14,},{iniTime: 15, endTime: 20,}]},
+        
+        {id: 50, limitHoursDay: 2, matricula: '1088464', name: 'Harold',
+        userReservations: [{iniTime: 7, endTime: 10},{iniTime: 11, endTime: 14,},{iniTime: 15, endTime: 20,}]},
+       
+        {id: 30, limitHoursDay: 2, matricula: '1088464', name: 'Harold',
+        userReservations: [{iniTime: 7, endTime: 10},{iniTime: 11, endTime: 14,},{iniTime: 15, endTime: 20,}]}]
         
         return  of(userInfo);
-
-        // return this._http.get<UserInfo>(this.url+"api/users/2");
     }
 
-    getGroups():Observable<Reservation[]>{
-        let userInfo:Reservation[] = [{iniTime: 7,endTime: 10}];
+    getReservations():Observable<Reservation[]>{
+        let userInfo:Reservation[] =  [{id:1, iniTime: 7, endTime: 10},
+            {id:2, iniTime: 11, endTime: 14,},
+            {id:3, iniTime: 15, endTime: 20,}];
         
         return  of(userInfo);
 
-        // return this._http.get<UserInfo>(this.url+"api/users/2");
     }
 
 }

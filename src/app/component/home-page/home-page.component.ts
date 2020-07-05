@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {PeticionesService} from '../../services/peticiones.service';
-import {Store} from '@ngrx/store';
-import {userState} from '../../store/index';
+import {Store, select} from '@ngrx/store';
+import {userState, selectAll} from '../../store/index';
 import * as userActions from '../../store/user-state.actions';
+import { UserInfo } from '../../models/userInfo';
 
 @Component({
   selector: 'app-home-page',
@@ -13,6 +14,8 @@ import * as userActions from '../../store/user-state.actions';
 })
 export class HomePageComponent implements OnInit {
 
+  state:any;
+
   constructor(
     private _peticionesService:PeticionesService,
     private store:Store<userState>
@@ -21,15 +24,23 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
 
     this.store.dispatch(userActions.loadUser());
+    this.store.dispatch(userActions.loadReservations());
 
-    this._peticionesService.getUser().subscribe(
-      result =>{
-        console.log(result);
-      },
-      error =>{
-        console.log(error);
-      }
-    )
+    this.store.pipe(select(selectAll)).subscribe(state =>{
+      this.state = state;
+    })
+    
+    console.log(this.state);
+    
+
+    // this._peticionesService.getUser().subscribe(
+    //   result =>{
+    //     console.log(result);
+    //   },
+    //   error =>{
+    //     console.log(error);
+    //   }
+    // )
   }
 
 }

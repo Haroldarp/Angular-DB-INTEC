@@ -1,6 +1,6 @@
 import {Reservation} from "./reservation";
 
-export interface UserInfo{
+export class UserInfo{
     id:Number;
     name:string;
     matricula:string;
