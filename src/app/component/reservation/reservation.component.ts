@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Schedule} from '../../models/schedule';
 import {Reservation} from '../../models/reservation';
-import {ReservationService} from '../../services/reservation.service'
+import {ReservationService} from '../../services/reservation.service';
+import {DateService} from '../../services/date.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
 
@@ -10,7 +11,7 @@ import * as $ from 'jquery';
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css'],
-  providers: [ReservationService]
+  providers: [ReservationService, DateService]
 })
 export class ReservationComponent implements OnInit {
 
@@ -19,7 +20,7 @@ export class ReservationComponent implements OnInit {
   public course:string;
 
   public currentReservationCounter:number;
-  public currentReservationDayIndex:number;
+  public currentReservationDay:string;
 
   public currentWeek:number;
 
@@ -33,6 +34,7 @@ export class ReservationComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _reservationService: ReservationService,
+    private _dateService: DateService,
     private _modalService: NgbModal
   ){
       window.scroll(0,0);
@@ -45,7 +47,7 @@ export class ReservationComponent implements OnInit {
     });
 
     this.currentReservationCounter = 0;
-    this.currentReservationDayIndex = null;
+    this.currentReservationDay = null;
 
     this.currentWeek = 1;
     
@@ -63,15 +65,14 @@ export class ReservationComponent implements OnInit {
     ]
 
     this.reservations = [
-      new Reservation("Lunes",2,0),
-      new Reservation("Martes",2,0),
-      new Reservation("Miercoles",2,0),
-      new Reservation("Jueves",2,0),
-      new Reservation("Viernes",2,0),
-      new Reservation("Sabado",2,0),
-      new Reservation("Domingo",10,0),
+      {day:"Lunes",limit: 2,counterHours: 0, iniTime: null, endTime: null},
+      {day:"Martes",limit: 2,counterHours: 0, iniTime: null, endTime: null},
+      {day:"Miercoles",limit: 2,counterHours: 0, iniTime: null, endTime: null},
+      {day:"Jueves",limit: 2,counterHours: 0, iniTime: null, endTime: null},
+      {day:"Viernes",limit: 2,counterHours: 0, iniTime: null, endTime: null},
+      {day:"Sabado",limit: 2,counterHours: 0, iniTime: null, endTime: null},
+      {day:"Domingo",limit: 2,counterHours: 0, iniTime: null, endTime: null},
     ]
-
 
   }
 
@@ -89,12 +90,12 @@ export class ReservationComponent implements OnInit {
     var div = event.currentTarget;
 
     if(this.currentReservationCounter == 0){
-      this.currentReservationDayIndex = this._reservationService.getDayIndex(div.id);
+      this.currentReservationDay = div.id.split("-")[0];
     }
 
     if(div.classList.contains('free')){
 
-      var state = this._reservationService.addInterval(this.reservations,div.id,this.currentReservationDayIndex);
+      var state = this._reservationService.addInterval(this.reservations,div.id,this.currentReservationDay);
 
       if(state.ok){
         $(div).addClass('reserving').removeClass('free');
@@ -106,7 +107,7 @@ export class ReservationComponent implements OnInit {
       }
 
     }else if(div.classList.contains('reserving')){
-      var state = this._reservationService.removeInterval(this.reservations,div.id,this.currentReservationDayIndex);
+      var state = this._reservationService.removeInterval(this.reservations,div.id,this.currentReservationDay);
 
       if(state.removeCode == 0){
         $(div).addClass('free').removeClass('reserving');
@@ -117,7 +118,7 @@ export class ReservationComponent implements OnInit {
         var day;
 
         for (let i = state.hour ; i <= 21; i++) {
-          day = this.reservations[this.currentReservationDayIndex].day;
+          day = this.reservations[this._reservationService.getDayIndex(this.currentReservationDay)].day;
           $(`#${day}-${i}`).addClass('free').removeClass('reserving');
         }
 
@@ -132,6 +133,10 @@ export class ReservationComponent implements OnInit {
   showErrorModal(modal, errorMessage){
     this.modalErrorMessage = errorMessage;
     this._modalService.open(modal, { centered: true });
+  }
+
+  getDate(day:number, week:number){
+    return this._dateService.getDateAddDays(day, week);
   }
 
 }

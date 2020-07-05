@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Building} from '../../models/building'
+
 
 
 @Component({
@@ -9,8 +11,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class CourseComponent implements OnInit {
 
-  @Input() building:string;
-  @Input() courses:Array<string>;
+  @Input() building:Building;
 
   constructor(
     private _router: Router

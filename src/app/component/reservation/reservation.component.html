@@ -29,16 +29,16 @@
             </div>
 
             <div class="d-flex flex-column col-md px-0"
-            *ngFor="let items of schedule">
+            *ngFor="let items of schedule; let dayIndex = index">
 
                 <div class="d-flex justify-content-center align-items-center schedule-header schedule-content">
                     {{items.day}}
                 </div>
 
                 <div class="d-flex justify-content-center align-items-center  schedule-content"
-                *ngFor="let item of items.state; let indice = index">
+                *ngFor="let item of items.state; let hourIndex = index">
 
-                    <div id="{{items.day}}-{{hours[indice]}}"
+                    <div id="{{getDate(dayIndex,currentWeek)}}-{{hours[hourIndex]}}"
                     (click)= "onFreeClick($event)"
                      [ngClass]="{
                         'free': item == 0,

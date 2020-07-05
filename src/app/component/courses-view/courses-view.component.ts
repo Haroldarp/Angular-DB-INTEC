@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Building} from '../../models/building';
+
 
 @Component({
   selector: 'app-courses-view',
@@ -8,8 +10,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class CoursesViewComponent implements OnInit {
 
-  public building:string;
-  public courses:Array<string>;
+  public building:Building;
 
   constructor(
     private _route: ActivatedRoute,
@@ -17,10 +18,10 @@ export class CoursesViewComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe((params:Params)=>{
-      this.building = params.building;
+      this.building = {code: params.building};
     });
 
-    this.courses = ['FD301','HR302','GC215','FD105','HR303','GC115','FD205','HR311'];
+    this.building.courses = ['FD301','HR302','GC215','FD105','HR303','GC115','FD205','HR311'];
   }
 
 }

@@ -1,19 +1,24 @@
-export class Reservation{
+export interface Reservation{
     
-    public day:string;
-    public limit:number;
-    public counterHours:number;
-    public intervals:interval;
-
-    constructor(day:string, limit:number, counterHours:number){
-        this.day = day;
-        this.limit = limit;
-        this.counterHours = counterHours;
-        this.intervals = {iniTime: null, endTime: null};
-    }
-}
-
-interface interval{
+    limit?:number;
+    building?:string;
+    course?: string;
+    counterHours?:number;
+    day?:string;
+    week?:string;
+    date?:string;
     iniTime:number;
     endTime:number;
+
+    // constructor(day:string, limit:number, counterHours:number){
+    //     this.day = day;
+    //     this.limit = limit;
+    //     this.counterHours = counterHours;
+    //     this.intervals = {iniTime: null, endTime: null};
+    // }
 }
+
+// interface interval{
+//     iniTime:number;
+//     endTime:number;
+// }

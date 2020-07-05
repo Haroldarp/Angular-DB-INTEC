@@ -1,17 +1,17 @@
 
 <div class="row col-md-12 img-custom mx-0 px-0">
-    <img src="../../../assets/images/{{building}}.jpg" class="img-fluid h-100 w-100 img">
+    <img src="../../../assets/images/{{building.code}}.jpg" class="img-fluid h-100 w-100 img">
     <div class="overlay w-100 h-100">
         <div class="row col-md-12 mx-auto h-100 justify-content-center align-items-center">
             <h1 class="title">
-                {{building}}
+                {{building.code}}
             </h1>
         </div>
     </div>
 </div>
 <div class="d-flex flex-wrap mt-3 mx-auto justify-content-center content">
     <button type="button" 
-    *ngFor="let course of courses" 
+    *ngFor="let course of building.courses" 
     id = "{{course}}"
     class="box btn mx-3 my-2"
     (click)="onClick($event)">

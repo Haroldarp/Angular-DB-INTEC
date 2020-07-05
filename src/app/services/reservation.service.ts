@@ -4,18 +4,21 @@ import {Reservation} from '../models/reservation';
 @Injectable()
 export class ReservationService{
 
-    constructor(){}
+    
+
+    constructor(
+    ){}
 
 
-    private verify(reservations:Array<Reservation>, code:string, currentDay:number):any{
+    private verify(reservations:Array<Reservation>, code:string, currentDate:string):any{
 
         var intervalCode;
 
-        var dayIndex = this.getDayIndex(code);
-        var reservation = reservations[currentDay];
+        var date = code.split("-")[0];
+        var reservation = reservations[this.getDayIndex(currentDate)];
         var hour = Number.parseInt( code.split("-")[1]);
 
-        if(dayIndex != currentDay)
+        if(date != currentDate)
             return {ok:false, errorMessage:'Las horas de la reservacion deben pertenece al mismo dia'};
 
         if(reservation.counterHours >= reservation.limit)
@@ -27,10 +30,10 @@ export class ReservationService{
 
         }else if(reservation.counterHours > 0){
 
-            if((hour + 1) == reservation.intervals.iniTime){
+            if((hour + 1) == reservation.iniTime){
                 intervalCode = 1;
 
-            }else if(hour == reservation.intervals.endTime){
+            }else if(hour == reservation.endTime){
                 intervalCode = 2;
 
             }else{
@@ -41,26 +44,26 @@ export class ReservationService{
         return {ok:true, intervalCode: intervalCode};
     }
 
-    addInterval(reservations:Array<Reservation>, code:string, currentDay:number):any{
+    addInterval(reservations:Array<Reservation>, code:string, currentDay:string):any{
         
         var verify = this.verify(reservations,code,currentDay);
 
         if(verify.ok){
             
-            var reservation = reservations[currentDay];
+            var reservation = reservations[this.getDayIndex(currentDay)];
             var hour = Number.parseInt( code.split("-")[1]);
     
             if(verify.intervalCode == 0){
-                reservation.intervals.iniTime =  hour;
-                reservation.intervals.endTime =  hour+1;
+                reservation.iniTime =  hour;
+                reservation.endTime =  hour+1;
                 reservation.counterHours++;
 
             }else if(verify.intervalCode == 1){
-                    reservation.intervals.iniTime--;
+                    reservation.iniTime--;
                     reservation.counterHours++;
 
             }else if(verify.intervalCode == 2){
-                    reservation.intervals.endTime++;
+                    reservation.endTime++;
                     reservation.counterHours++;
             }
 
@@ -71,67 +74,43 @@ export class ReservationService{
         }
     }
 
-    removeInterval(reservations:Array<Reservation>, code:string, currentDay:number):any{
+    removeInterval(reservations:Array<Reservation>, code:string, currentDay:string):any{
     
-        var reservation = reservations[currentDay];
+        var reservation = reservations[this.getDayIndex(currentDay)];
         var hour = Number.parseInt( code.split("-")[1]);
         var removeCode;
 
         if(reservation.counterHours == 1){
-            reservation.intervals.iniTime = null;
-            reservation.intervals.endTime = null;
+            reservation.iniTime = null;
+            reservation.endTime = null;
             reservation.counterHours--;
             removeCode = 0
 
         }
-        else if(reservation.intervals.iniTime == hour){
-            reservation.intervals.iniTime++;
+        else if(reservation.iniTime == hour){
+            reservation.iniTime++;
             reservation.counterHours--;
             removeCode = 0;
 
-        }else if(reservation.intervals.endTime == hour+1){
-            reservation.intervals.endTime--;
+        }else if(reservation.endTime == hour+1){
+            reservation.endTime--;
             reservation.counterHours--;
             removeCode = 0;
 
         }else{
-            reservation.counterHours = hour - reservation.intervals.iniTime;
-            reservation.intervals.endTime = hour;
+            reservation.counterHours = hour - reservation.iniTime;
+            reservation.endTime = hour;
             removeCode = 1;
         }
 
         return {removeCode: removeCode, hour: hour}
     }
 
-    getDayIndex(code:string):number{
+    getDayIndex(dateString:string):number{
 
-        var split = code.split("-");
-
-        switch (split[0]) {
-            case "Lunes":
-                return 0;
-                
-            case "Martes":
-                return 1;
-
-            case "Miercoles":
-                return 2;
-
-            case "Jueves":
-                return 3;
-
-            case "Viernes":
-                return 4;
-
-            case "Sabado":
-                return 5;
-            
-            case "Domingo":
-                return 6;
-        
-            default:
-                break;
-        }
+        var date = new Date(dateString);
+        var dayNumber = date.getDay();
+        return dayNumber == 0? 6:dayNumber-1;
 
     }
 }

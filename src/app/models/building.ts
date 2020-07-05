@@ -1,11 +1,7 @@
-export class Building{
+export interface Building{
 
-    public courses:Array<string>;
+    name?:string;
+    code:String;
+    courses?:Array<string>;
 
-    constructor(
-        public name:string,
-        public code:string
-    ){
-        this.courses = [];
-    }
 }

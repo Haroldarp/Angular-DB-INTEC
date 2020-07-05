@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Building} from '../../models/building'
 
 @Component({
   selector: 'app-building',
@@ -8,10 +9,9 @@ import {Router} from '@angular/router';
 })
 export class BuildingComponent implements OnInit {
 
-  public edificios:Array<string>;
-  public cursos:Array<string>;
-  public data:Array<string>;
   public title:string;
+  public buildings:Array<Building>;
+  // public data:Array<string>;
 
   constructor(
     private _router: Router
@@ -19,8 +19,17 @@ export class BuildingComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = 'Edificos';
-    this.edificios = ['FD','DP','GC','EL','AJ','AH','ER','PB','EP'];
-    this.data = [];
+    this.buildings = [
+      {code :'FD'},
+      {code:'DP'},
+      {code : 'GC'},
+      {code: 'EL'},
+      {code: 'AJ'},
+      {code: 'AH'},
+      {code: 'ER'},
+      {code: 'PB'},
+      {code: 'EP'}];
+    // this.data = [];
 
   }
 
@@ -30,17 +39,17 @@ export class BuildingComponent implements OnInit {
     this._router.navigate([`home/curso/${event.currentTarget.id}`]);
   }
 
-  cargarEdificio(){
-    var index = 0;
-    var timer = setInterval(()=>{
-      if(index < this.edificios.length){
-        this.data.push(this.edificios[index]);
-        index++;
-      }else{
-        clearInterval(timer);
-      }
+  // cargarEdificio(){
+  //   var index = 0;
+  //   var timer = setInterval(()=>{
+  //     if(index < this.edificios.length){
+  //       this.data.push(this.edificios[index]);
+  //       index++;
+  //     }else{
+  //       clearInterval(timer);
+  //     }
 
-    },30);
-  }
+  //   },30);
+  // }
 
 }

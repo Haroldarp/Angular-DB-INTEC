@@ -15,14 +15,10 @@ export class AvailableNowComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildings = [
-      new Building("blablabla","FD"),
-      new Building("blablabla","FD"),
-      new Building("blablabla","DP")
+      {name:"blablabla", code: "FD", courses: ['FD301','HR302','GC215','FD105']},
+      {name:"blablabla", code: "FD", courses:['HR303','GC115','FD205','HR311'] },
+      {name:"blablabla", code: "DP", courses:['FD301','HR302','GC215','FD105'] },
     ];
-
-    this.buildings[0].courses.push('FD301','HR302','GC215','FD105');
-    this.buildings[1].courses.push('HR303','GC115','FD205','HR311');
-    this.buildings[2].courses.push('FD301','HR302','GC215','FD105');
 
     console.log(this.buildings);
   }
