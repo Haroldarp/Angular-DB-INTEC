@@ -9,6 +9,7 @@ export interface Reservation{
     date?:string;
     iniTime:number;
     endTime:number;
+    group?: string[];
 
     // constructor(day:string, limit:number, counterHours:number){
     //     this.day = day;
@@ -17,8 +18,3 @@ export interface Reservation{
     //     this.intervals = {iniTime: null, endTime: null};
     // }
 }
-
-// interface interval{
-//     iniTime:number;
-//     endTime:number;
-// }

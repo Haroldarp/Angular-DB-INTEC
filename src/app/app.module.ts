@@ -22,6 +22,13 @@ import { ReservationCardsComponent } from './component/reservation-cards/reserva
 import {DateService} from './services/date.service';
 import {PeticionesService} from './services/peticiones.service';
 import {ReservationService} from './services/reservation.service';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers, metaReducers } from './reducers';
+import * as fromUserState from './store';
+import { UserStateEffects } from './store/user-state.effects';
 
 @NgModule({
   declarations: [
@@ -44,7 +51,20 @@ import {ReservationService} from './services/reservation.service';
     HttpClientModule,
     routing,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([UserStateEffects]),
+    StoreModule.forRoot(reducers, {
+      metaReducers, 
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      }
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreModule.forFeature(fromUserState.userStateFeatureKey, fromUserState.reducers, { metaReducers: fromUserState.metaReducers })
   ],
   providers: [
     appRoutingProviders,

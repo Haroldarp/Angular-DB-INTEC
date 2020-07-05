@@ -4,6 +4,7 @@ export interface UserInfo{
     id:Number;
     name:string;
     matricula:string;
-    limitHoursDay: string;
+    limitHoursDay: number;
     userReservations: Reservation[];
+    userGroups?: Reservation[];
 }

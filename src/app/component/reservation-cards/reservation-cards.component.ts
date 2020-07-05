@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ReservationInfo} from '../../models/reservation-info';
+import {Reservation} from '../../models/reservation';
 
 @Component({
   selector: 'app-reservation-cards',
@@ -8,7 +8,7 @@ import {ReservationInfo} from '../../models/reservation-info';
 })
 export class ReservationCardsComponent implements OnInit {
 
-  @Input() reservationInfo:ReservationInfo;
+  @Input() reservationInfo:Reservation;
 
   constructor() { }
 
