@@ -31,6 +31,16 @@ export class UserStateEffects {
     )
   );
 
+  loadGroups$ = createEffect(() => this.actions$.pipe(
+    ofType(userActions.loadGroups),
+    mergeMap(() => 
+    this._peticionesService.getGroups().pipe(
+        map(Groups => userActions.loadGroupsSuccess({Groups})),
+        catchError(error => of(userActions.loadGroupsFailure({error})))
+      ))
+    )
+  );
+
 
   constructor(private actions$: Actions, private _peticionesService:PeticionesService) {}
 

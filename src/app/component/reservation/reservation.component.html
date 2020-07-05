@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row col-md-12 justify-content-center mt-2 mb-4 mx-0">
-        <h3 class="text-uppercase">{{course}}</h3>
+        <h3 class="text-uppercase">{{currentReservation.course}}</h3>
     </div>
     <div class="row col-md-10 offset-md-1 justify-content-center mb-5 px-0 schedule">
 
@@ -10,7 +10,7 @@
             <button id="left" type="button" class="btn arrow" (click)="onArrowClick($event)">
                 <i class="fas fa-arrow-left"></i>
             </button>
-            <h3 class="text-uppercase weekTitle">semana {{currentWeek}}</h3>
+            <h3 class="text-uppercase weekTitle">semana {{currentReservation.week}}</h3>
             <button id="right" type="button" class="btn arrow" (click)="onArrowClick($event)">
                 <i class="fas fa-arrow-right"></i>
             </button>
@@ -38,7 +38,7 @@
                 <div class="d-flex justify-content-center align-items-center  schedule-content"
                 *ngFor="let item of items.state; let hourIndex = index">
 
-                    <div id="{{getDate(dayIndex,currentWeek)}}/{{hours[hourIndex]}}"
+                    <div id="{{getDate(dayIndex,currentReservation.week)}}/{{hours[hourIndex]}}"
                     (click)= "onFreeClick($event)"
                      [ngClass]="{
                         'free': item == 0,

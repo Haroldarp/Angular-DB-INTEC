@@ -6,7 +6,7 @@ export interface Reservation{
     course?: string;
     counterHours?:number;
     day?:string;
-    week?:string;
+    week?:number;
     date?:string;
     iniTime:number;
     endTime:number;

@@ -5,6 +5,9 @@ import {Reservation} from '../../models/reservation';
 import {ReservationService} from '../../services/reservation.service';
 import {DateService} from '../../services/date.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Store, select} from '@ngrx/store';
+import {userState, selectAll} from '../../store/index';
+import * as userActions from '../../store/user-state.actions';
 import * as $ from 'jquery';
 
 @Component({
@@ -17,12 +20,7 @@ export class ReservationComponent implements OnInit {
 
   @ViewChild('errorModal') errorModal: ElementRef;
 
-  public course:string;
-
-  public currentReservationCounter:number;
-  public currentReservationDay:string;
-
-  public currentWeek:number;
+  public currentReservation: Reservation;
 
   public hours:Array<number>;
   public schedule:Array<Schedule>;
@@ -31,26 +29,42 @@ export class ReservationComponent implements OnInit {
 
   public modalErrorMessage:string;
 
+  state:any;
+
+
   constructor(
     private _route: ActivatedRoute,
     private _reservationService: ReservationService,
     private _dateService: DateService,
-    private _modalService: NgbModal
+    private _modalService: NgbModal,
+    private store:Store<userState>
+
   ){
       window.scroll(0,0);
    }
 
   ngOnInit(): void {
 
+    this.currentReservation = {course: null,
+      iniTime: null, endTime: null, 
+      week:1, day:null, date: null, 
+      group: [], limit: 2, counterHours: 0}
+
     this._route.params.subscribe((params:Params)=>{
-        this.course = params.course;
+      this.currentReservation.course = params.course;
     });
 
-    this.currentReservationCounter = 0;
-    this.currentReservationDay = null;
 
-    this.currentWeek = 1;
+    this.store.dispatch(userActions.loadUser());
+    this.store.dispatch(userActions.loadReservations());
+    this.store.dispatch(userActions.loadGroups());
+
+    this.store.pipe(select(selectAll)).subscribe(state =>{
+      this.state = this._reservationService.transformEntity(state.userReservation.entities);
+    });
     
+    console.log(this.state);
+
 
     this.hours = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
 
@@ -71,17 +85,17 @@ export class ReservationComponent implements OnInit {
       {day:"Jueves",limit: 2,counterHours: 0, iniTime: null, endTime: null},
       {day:"Viernes",limit: 2,counterHours: 0, iniTime: null, endTime: null},
       {day:"Sabado",limit: 2,counterHours: 0, iniTime: null, endTime: null},
-      {day:"Domingo",limit: 2,counterHours: 0, iniTime: null, endTime: null},
+      {day:"Domingo",limit: 10,counterHours: 0, iniTime: null, endTime: null},
     ]
 
   }
 
   onArrowClick(event:any){
-    if(event.currentTarget.id == 'left' && this.currentWeek > 1){
-      this.currentWeek--;
+    if(event.currentTarget.id == 'left' && this.currentReservation.week > 1){
+      this.currentReservation.week--;
 
-    }else if(event.currentTarget.id == 'right' && this.currentWeek < 12){
-      this.currentWeek++;
+    }else if(event.currentTarget.id == 'right' && this.currentReservation.week < 12){
+      this.currentReservation.week++;
 
     }
   }
@@ -89,17 +103,17 @@ export class ReservationComponent implements OnInit {
   onFreeClick(event:any){
     var div = event.currentTarget;
 
-    if(this.currentReservationCounter == 0){
-      this.currentReservationDay = div.id.split("/")[0];
+    if(this.currentReservation.counterHours == 0){
+      this.currentReservation.date = div.id.split("/")[0];
     }
 
     if(div.classList.contains('free')){
 
-      var state = this._reservationService.addInterval(this.reservations,div.id,this.currentReservationDay);
+      var state = this._reservationService.addInterval(this.reservations,div.id,this.currentReservation.date);
 
       if(state.ok){
         $(div).addClass('reserving').removeClass('free');
-        this.currentReservationCounter++;
+        this.currentReservation.counterHours++;
 
       }else{
         console.log(state.errorMessage);
@@ -107,26 +121,26 @@ export class ReservationComponent implements OnInit {
       }
 
     }else if(div.classList.contains('reserving')){
-      var state = this._reservationService.removeInterval(this.reservations,div.id,this.currentReservationDay);
+
+      var state = this._reservationService.removeInterval(this.reservations,div.id,this.currentReservation.date);
 
       if(state.removeCode == 0){
         $(div).addClass('free').removeClass('reserving');
-        this.currentReservationCounter--;
+        this.currentReservation.counterHours--;
 
       }else if(state.removeCode == 1){
 
-        var day;
-
         for (let i = state.hour ; i <= 21; i++) {
-          day = this.reservations[this._reservationService.getDayIndex(this.currentReservationDay)].day;
-          $(`#${day}-${i}`).addClass('free').removeClass('reserving');
+          var divs = document.getElementById(`${this.currentReservation.date}/${i}`);
+          $(divs).addClass('free').removeClass('reserving');
         }
 
       }
     
     }
 
-    console.log(this.reservations);
+    // console.log(this.reservations);
+      console.log(this.currentReservation);
 
   }
 

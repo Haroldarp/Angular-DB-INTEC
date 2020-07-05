@@ -18,10 +18,10 @@ export class MyReservationComponent implements OnInit {
   ngOnInit(): void {
 
     this.prueba = [
-      { building: 'FD', course:"FD312",week: "1",day: "Martes", date: "15-5-2020",iniTime: 7,endTime: 10},
-      { building: 'FD', course: "FD315",week: "1",day: "Martes", date:"15-5-2020",iniTime: 11,endTime: 15},
-      { building: 'HR', course: "FD315",week: "1",day: "Martes", date:"15-5-2020",iniTime: 11,endTime: 15},
-      { building: 'HR', course: "FD315",week: "1",day: "Martes", date:"15-5-2020",iniTime: 11,endTime: 15},
+      { building: 'FD', course:"FD312",week: 1,day: "Martes", date: "15-5-2020",iniTime: 7,endTime: 10},
+      { building: 'FD', course: "FD315",week: 1,day: "Martes", date:"15-5-2020",iniTime: 11,endTime: 15},
+      { building: 'HR', course: "FD315",week: 1,day: "Martes", date:"15-5-2020",iniTime: 11,endTime: 15},
+      { building: 'HR', course: "FD315",week: 1 ,day: "Martes", date:"15-5-2020",iniTime: 11,endTime: 15},
     ]
 
     this.myReservations = this.groupByBuilding(this.prueba,"building");

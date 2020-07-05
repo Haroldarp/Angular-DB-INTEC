@@ -44,10 +44,11 @@ export const initialState: userState = {
 export const reducers = createReducer(
   initialState,
 
+  //user
   on ( userActions.loadUserSuccess, (state, action) =>{
     return {
       ...state,
-      user: userAdapter.addAll(action.user, state.user)
+      user: userAdapter.addOne(action.user, state.user)
     } 
       
   }),
@@ -58,6 +59,7 @@ export const reducers = createReducer(
     };
   }),
 
+  //reservations
   on ( userActions.loadReservationsSuccess, (state, action) =>{
     return {
       ...state,
@@ -66,6 +68,21 @@ export const reducers = createReducer(
       
   }),
   on ( userActions.loadReservationsFailure, (state, action) =>{
+    return {
+      ...state,
+      error: action.error
+    };
+  }),
+
+  //groups
+  on ( userActions.loadGroupsSuccess, (state, action) =>{
+    return {
+      ...state,
+      userGroupReservation: userReservationAdapter.addAll(action.Groups,state.userGroupReservation),
+    } 
+      
+  }),
+  on ( userActions.loadGroupsFailure, (state, action) =>{
     return {
       ...state,
       error: action.error

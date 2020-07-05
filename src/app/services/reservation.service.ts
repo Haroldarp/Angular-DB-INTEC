@@ -104,6 +104,17 @@ export class ReservationService{
         return {removeCode: removeCode, hour: hour}
     }
 
+    transformEntity(reservation:any):Reservation[]{
+        var prop = Object.getOwnPropertyNames(reservation);
+        let userReservations:Reservation[] = [];
+        prop.forEach(item =>{
+         userReservations.push( {id: reservation[item].id, date: reservation[item].date,
+        iniTime: reservation[item].iniTime , endTime: reservation[item].endTime});
+        })
+
+        return userReservations;
+    }
+
     getDayIndex(dateString:string):number{
 
         var date = new Date(dateString);
