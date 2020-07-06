@@ -115,7 +115,9 @@ export class ReservationService{
         var prop = Object.getOwnPropertyNames(reservation);
         let userReservations:Reservation[] = [];
         prop.forEach(item =>{
-         userReservations.push( {id: reservation[item].id, date: reservation[item].date,
+         userReservations.push( {id: reservation[item].id, building: reservation[item].building , 
+        course: reservation[item].course, week: reservation[item].week , day: reservation[item].day
+        ,date: reservation[item].date,
         iniTime: reservation[item].iniTime , endTime: reservation[item].endTime});
         })
 

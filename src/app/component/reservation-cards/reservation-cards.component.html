@@ -1,6 +1,7 @@
 <div class="mx-3 my-4 card-custom">
     <div class="card">
-        <i class="fas fa-trash-alt trash-icon mr-2 mt-2"></i>
+        <i class="fas fa-trash-alt trash-icon mr-2 mt-2" id = "{{reservationInfo.id}}"
+        (click)="deleteReservation($event)"></i>
         <div class="card-body px-3">
         <div class="d-flex px-0 mx-0">
             <h2 class="text-center my-auto course-title">{{reservationInfo.course}}</h2> 

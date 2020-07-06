@@ -47,3 +47,19 @@ export const loadGroupsFailure = createAction(
   '[User login effect] Load Groups  Failure',
   props<{ error: any }>()
 );
+
+//delete reservations
+export const deleteReservation = createAction(
+  '[userReservation my-reservations] delete Reservations',
+  props<{ id: string }>()
+);
+
+export const deleteReservationSuccess = createAction(
+  '[userReservation login effect] delete Reservations Success',
+  props<{ id: string }>()
+);
+
+export const deleteReservationFailure = createAction(
+  '[userReservation login effect] delete Reservations Failure',
+  props<{ error: any }>()
+);

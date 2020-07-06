@@ -78,7 +78,7 @@ export const reducers = createReducer(
   on ( userActions.loadGroupsSuccess, (state, action) =>{
     return {
       ...state,
-      userGroupReservation: userReservationAdapter.addAll(action.Groups,state.userGroupReservation),
+      userGroupReservation: userGroupReservationAdapter.addAll(action.Groups,state.userGroupReservation),
     } 
       
   }),
@@ -89,6 +89,20 @@ export const reducers = createReducer(
     };
   }),
 
+  //delete reservation
+  on ( userActions.deleteReservationSuccess, (state, action) =>{
+    return {
+      ...state,
+      userReservation: userReservationAdapter.removeOne(action.id,state.userReservation),
+    } 
+      
+  }),
+  on ( userActions.deleteReservationFailure, (state, action) =>{
+    return {
+      ...state,
+      error: action.error
+    };
+  }),
  
 )
 

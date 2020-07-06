@@ -41,6 +41,16 @@ export class UserStateEffects {
     )
   );
 
+  deleteReservation$ = createEffect(() => this.actions$.pipe(
+    ofType(userActions.deleteReservation),
+    mergeMap( action => 
+    this._peticionesService.deleteReservation(action.id).pipe(
+        map(() => userActions.deleteReservationSuccess({id: action.id})),
+        catchError(error => of(userActions.deleteReservationFailure({error})))
+      ))
+    )
+  );
+
 
   constructor(private actions$: Actions, private _peticionesService:PeticionesService) {}
 
