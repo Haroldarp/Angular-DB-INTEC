@@ -25,11 +25,10 @@ export class ReservationComponent implements OnInit {
   public hours:Array<number>;
   public schedule:Array<Schedule>;
 
-  public reservations:Array<Reservation>;
+  public reservations:Reservation[];
+  public reservationGroups:Reservation[];
 
   public modalErrorMessage:string;
-
-  state:any;
 
 
   constructor(
@@ -60,10 +59,12 @@ export class ReservationComponent implements OnInit {
     this.store.dispatch(userActions.loadGroups());
 
     this.store.pipe(select(selectAll)).subscribe(state =>{
-      this.state = this._reservationService.transformEntity(state.userReservation.entities);
+      this.reservations = this._reservationService.transformEntity(state.userReservation.entities);
+      this.reservationGroups = this._reservationService.transformEntity(state.userGroupReservation.entities);
     });
     
-    console.log(this.state);
+    console.log(this.reservations);
+    console.log(this.reservationGroups);
 
 
     this.hours = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
@@ -76,16 +77,6 @@ export class ReservationComponent implements OnInit {
       new Schedule("Viernes",[0,0,1,1,1,1,2,2,2,1,1,1,1,0,0]),
       new Schedule("Sabado",[1,1,1,1,1,1,0,0,0,2,2,1,1,1,1]),
       new Schedule("Domingo",[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-    ]
-
-    this.reservations = [
-      {day:"Lunes",limit: 2,counterHours: 0, iniTime: null, endTime: null},
-      {day:"Martes",limit: 2,counterHours: 0, iniTime: null, endTime: null},
-      {day:"Miercoles",limit: 2,counterHours: 0, iniTime: null, endTime: null},
-      {day:"Jueves",limit: 2,counterHours: 0, iniTime: null, endTime: null},
-      {day:"Viernes",limit: 2,counterHours: 0, iniTime: null, endTime: null},
-      {day:"Sabado",limit: 2,counterHours: 0, iniTime: null, endTime: null},
-      {day:"Domingo",limit: 10,counterHours: 0, iniTime: null, endTime: null},
     ]
 
   }
@@ -109,11 +100,10 @@ export class ReservationComponent implements OnInit {
 
     if(div.classList.contains('free')){
 
-      var state = this._reservationService.addInterval(this.reservations,div.id,this.currentReservation.date);
+      var state = this._reservationService.addInterval(this.reservations,this.reservationGroups , this.currentReservation,div.id,);
 
       if(state.ok){
         $(div).addClass('reserving').removeClass('free');
-        this.currentReservation.counterHours++;
 
       }else{
         console.log(state.errorMessage);
@@ -122,11 +112,10 @@ export class ReservationComponent implements OnInit {
 
     }else if(div.classList.contains('reserving')){
 
-      var state = this._reservationService.removeInterval(this.reservations,div.id,this.currentReservation.date);
+      var state = this._reservationService.removeInterval(this.currentReservation,div.id);
 
       if(state.removeCode == 0){
         $(div).addClass('free').removeClass('reserving');
-        this.currentReservation.counterHours--;
 
       }else if(state.removeCode == 1){
 
@@ -139,7 +128,6 @@ export class ReservationComponent implements OnInit {
     
     }
 
-    // console.log(this.reservations);
       console.log(this.currentReservation);
 
   }
