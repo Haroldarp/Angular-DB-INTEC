@@ -14,14 +14,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._peticionesService.getUser().subscribe(
-      result =>{
-        console.log(result);
-      },
-      error =>{
-        console.log(error);
-      }
-    )
+   
   }
 
 }

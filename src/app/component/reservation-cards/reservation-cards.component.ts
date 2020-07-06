@@ -21,7 +21,6 @@ export class ReservationCardsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.reservationInfo); 
   }
 
   getDateString(index:number){
