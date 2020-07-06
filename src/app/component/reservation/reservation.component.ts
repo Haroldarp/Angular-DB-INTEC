@@ -141,4 +141,8 @@ export class ReservationComponent implements OnInit {
     return this._dateService.getDateAddDays(day, week);
   }
 
+  datePassed(date:string, hour:number){
+    return this._dateService.datePassed(date, hour);
+  }
+
 }

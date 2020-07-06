@@ -11,13 +11,13 @@ export class DateService{
     }
 
     getDateAddDays(day:number, week:number):any{
-        var startDate = new Date("2020-7-6");
+        var startDate = new Date("2020-7-1");
         var date = new Date();
 
         var dayNumber = this.getDayIndex(startDate);
 
         if(week == 1 && day == dayNumber)
-            return startDate.toDateString();
+            return `${startDate.getUTCFullYear()}-${startDate.getUTCMonth()+1}-${startDate.getUTCDate()}`;
 
 
         if(week == 1 && day < dayNumber){
@@ -31,10 +31,23 @@ export class DateService{
 
         }
 
-        // return date.toDateString();
         return `${date.getUTCFullYear()}-${date.getUTCMonth()+1}-${date.getUTCDate()}`;
         
         
+    }
+
+    datePassed(date:string, hour:number){
+        var now = new Date();
+        var seleactedTime = new Date(date);
+        seleactedTime.setHours(hour);
+
+        console.log(`${now} - ${seleactedTime}`);
+
+        if(seleactedTime < now)
+            return true;
+        
+        return false;
+
     }
 
     getDayDifference(){

@@ -41,7 +41,8 @@
                     <div id="{{getDate(dayIndex,currentReservation.week)}}/{{hours[hourIndex]}}"
                     (click)= "onFreeClick($event)"
                      [ngClass]="{
-                        'free': item == 0,
+                        'free': (item == 0 && !datePassed(getDate(dayIndex,currentReservation.week),hours[hourIndex])),
+                        'reserve-imposible': (item == 0 && datePassed(getDate(dayIndex,currentReservation.week),hours[hourIndex])),
                         'class': item == 1,
                         'reserved': item == 2}">
                     </div>
