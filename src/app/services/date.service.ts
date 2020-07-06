@@ -41,8 +41,6 @@ export class DateService{
         var seleactedTime = new Date(date);
         seleactedTime.setHours(hour);
 
-        console.log(`${now} - ${seleactedTime}`);
-
         if(seleactedTime < now)
             return true;
         
@@ -50,15 +48,34 @@ export class DateService{
 
     }
 
-    getDayDifference(){
+    getDayString(index:number){
+        switch (index) {
+            case 0:
+                return 'Lunes';
 
-        var date1:any = new Date();
-        var date2:any =  new Date("2020-07-01");
-        const diffTime = Math.abs(date2 - date1);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+            case 1:
+                return 'Martes';
 
+            case 2:
+                return 'Miercoles';
 
-        return diffDays;
+            case 3:
+                return 'Jueves';
+
+            case 4:
+                return 'Viernes';
+
+            case 5:
+                return 'Sabado';
+
+            case 6:
+                return 'Domingo';
+                
+        
+            default:
+                break;
+        }
+
     }
 
 }

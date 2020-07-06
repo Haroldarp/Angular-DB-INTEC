@@ -19,6 +19,10 @@ import * as $ from 'jquery';
 export class ReservationComponent implements OnInit {
 
   @ViewChild('errorModal') errorModal: ElementRef;
+  @ViewChild('sendReservationModal') sendReservationModal: ElementRef;
+
+  matricula:string;
+  minPeople:number;
 
   public currentReservation: Reservation;
 
@@ -44,6 +48,8 @@ export class ReservationComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.matricula ="";
+
     this.currentReservation = {course: null,
       iniTime: null, endTime: null, 
       week:1, day:null, date: null, 
@@ -62,6 +68,8 @@ export class ReservationComponent implements OnInit {
       this.reservations = this._reservationService.transformEntity(state.userReservation.entities);
       this.reservationGroups = this._reservationService.transformEntity(state.userGroupReservation.entities);
     });
+
+    this.minPeople = 4;
     
     console.log(this.reservations);
     console.log(this.reservationGroups);
@@ -132,9 +140,24 @@ export class ReservationComponent implements OnInit {
 
   }
 
+  agregarMatricula(){
+    this.currentReservation.group.push(this.matricula);
+    this.matricula = '';
+  }
+
   showErrorModal(modal, errorMessage){
     this.modalErrorMessage = errorMessage;
     this._modalService.open(modal, { centered: true });
+  }
+
+  showSendReservationModal(){
+    //verifica que exixte
+    this._modalService.open(this.sendReservationModal, { centered: true })
+  }
+
+  sendReservation(){
+    this.currentReservation.day = this._reservationService.getDayIndex(this.currentReservation.date);
+    console.log(this.currentReservation);
   }
 
   getDate(day:number, week:number){

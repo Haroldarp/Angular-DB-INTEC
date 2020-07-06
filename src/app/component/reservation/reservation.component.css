@@ -72,4 +72,26 @@
 .btn-custom{
     background-color: red;
     color: white;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    font-weight: bold;
+    transition: all 0.5s;
+    
+}
+
+.btn-custom:hover{
+    background-color: white;
+    color: red;
+    transform: scale(1.1);
+}
+
+.btn-custom1{
+    background-color: red;
+    color: white;
+
+}
+
+.error{
+    font-weight: bold;
+    color: red;
+    
 }

@@ -5,11 +5,10 @@
         <div class="d-flex px-0 mx-0">
             <h2 class="text-center my-auto course-title">{{reservationInfo.course}}</h2> 
             <div class="col-md">
-                <p class="text-right mb-0 font-weight-bold">{{reservationInfo.date}}</p>
-                <p class="text-right mb-0 font-weight-bold">Semana {{reservationInfo.week}} - 
-                {{reservationInfo.day}}</p>
-                <p class="text-right mb-0 font-weight-bold">{{reservationInfo.iniTime}}:00 - 
-                    {{reservationInfo.endTime}}:00</p>
+                <p class="text-right mb-0 font-weight-bold">{{reservationInfo.date}} <br>
+                    Semana {{reservationInfo.week}} <br>
+                {{getDateString(reservationInfo.day)}} <br>
+                {{reservationInfo.iniTime}}:00 - {{reservationInfo.endTime}}:00</p>
             </div>
         </div>
         </div>

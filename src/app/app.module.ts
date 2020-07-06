@@ -4,6 +4,8 @@ import {routing, appRoutingProviders} from "./app.routing";
 import {HttpClientModule} from '@angular/common/http'
 import {ReactiveFormsModule} from '@angular/forms'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,6 +52,7 @@ import { UserStateEffects } from './store/user-state.effects';
     AppRoutingModule,
     HttpClientModule,
     routing,
+    FormsModule,
     ReactiveFormsModule,
     NgbModule,
     
