@@ -51,6 +51,17 @@ export class UserStateEffects {
     )
   );
 
+  
+  deleteGroup$ = createEffect(() => this.actions$.pipe(
+    ofType(userActions.deleteGroup),
+    mergeMap( action => 
+    this._peticionesService.deleteGroup(action.id).pipe(
+        map(() => userActions.deleteGroupSuccess({id: action.id})),
+        catchError(error => of(userActions.deleteGroupFailure({error})))
+      ))
+    )
+  );
+
 
   constructor(private actions$: Actions, private _peticionesService:PeticionesService) {}
 

@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
 
   onSumit(){
     if(this.form.valid){
+      this.store.dispatch(userActions.loadUser());
       this._router.navigate([`home/edificios`]);
 
    }else if(this.form.errors?.validUser){

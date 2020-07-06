@@ -55,11 +55,40 @@ export const deleteReservation = createAction(
 );
 
 export const deleteReservationSuccess = createAction(
-  '[userReservation login effect] delete Reservations Success',
+  '[userReservation my-reservations effect] delete Reservations Success',
   props<{ id: string }>()
 );
 
 export const deleteReservationFailure = createAction(
-  '[userReservation login effect] delete Reservations Failure',
+  '[userReservation my-reservations effect] delete Reservations Failure',
   props<{ error: any }>()
+);
+
+
+//delete group
+export const deleteGroup = createAction(
+  '[userReservationGroup my-reservations] delete Group',
+  props<{ id: string }>()
+);
+
+export const deleteGroupSuccess = createAction(
+  '[userReservationGroup my-reservations effect] delete Group Success',
+  props<{ id: string }>()
+);
+
+export const deleteGroupFailure = createAction(
+  '[userReservationGroup my-reservations effect] delete Group Failure',
+  props<{ error: any }>()
+);
+
+
+//set currentDelete
+export const setCurrentDeleteReservation = createAction(
+  '[currentDeleteReservation my-reservations] delete reservation',
+  props<{ id: string }>()
+);
+
+export const setCurrentDeleteGroup = createAction(
+  '[currentDeleteGroup my-reservations] delete Group',
+  props<{ id: string  }>()
 );

@@ -24,8 +24,10 @@ interface userGroupReservationState extends EntityState<Reservation>{}
 export interface userState {
   userReservation: userReservationState,
   user: userInfoState,
-  userGroupReservation: userGroupReservationState
-  error:any
+  userGroupReservation: userGroupReservationState,
+  error:any,
+  currentDeleteReservation:string,
+  currentDeleteGroup:string
 }
 
 const userAdapter:EntityAdapter<UserInfo> = createEntityAdapter<UserInfo>()
@@ -37,7 +39,9 @@ export const initialState: userState = {
   user : userAdapter.getInitialState({}),
   userReservation : userReservationAdapter.getInitialState({}),
   userGroupReservation : userGroupReservationAdapter.getInitialState({}),
-  error: undefined
+  error: undefined,
+  currentDeleteReservation:"",
+  currentDeleteGroup:""
 };
 
 
@@ -103,7 +107,36 @@ export const reducers = createReducer(
       error: action.error
     };
   }),
- 
+
+  
+   //delete Group
+   on ( userActions.deleteGroupSuccess, (state, action) =>{
+    return {
+      ...state,
+      userGroupReservation: userGroupReservationAdapter.removeOne(action.id,state.userGroupReservation),
+    } 
+      
+  }),
+  on ( userActions.deleteGroupFailure, (state, action) =>{
+    return {
+      ...state,
+      error: action.error
+    };
+  }),
+
+  //set currentDelete
+  on ( userActions.setCurrentDeleteReservation, (state, action) =>{
+    return {
+      ...state,
+      currentDeleteReservation: action.id
+    };
+
+  }),on ( userActions.setCurrentDeleteGroup, (state, action) =>{
+    return {
+      ...state,
+      currentDeleteGroup: action.id
+    };
+  }),
 )
 
 export const selectorsKey = createFeatureSelector<userState>(
@@ -113,6 +146,16 @@ export const selectorsKey = createFeatureSelector<userState>(
 export const selectAll = createSelector(
   selectorsKey,
   (state: userState) => state
+)
+
+export const getCurrentDeleteReservation = createSelector(
+  selectorsKey,
+  (state: userState) => state.currentDeleteReservation
+)
+
+export const getCurrentDeleteGroup = createSelector(
+  selectorsKey,
+  (state: userState) => state.currentDeleteGroup
 )
 
 

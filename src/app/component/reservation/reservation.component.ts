@@ -60,7 +60,6 @@ export class ReservationComponent implements OnInit {
     });
 
 
-    this.store.dispatch(userActions.loadUser());
     this.store.dispatch(userActions.loadReservations());
     this.store.dispatch(userActions.loadGroups());
 

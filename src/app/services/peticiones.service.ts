@@ -46,4 +46,8 @@ export class PeticionesService{
         return of("1");
     }
 
+    deleteGroup(id:string):Observable<any>{
+        return of("1");
+    }
+
 }
