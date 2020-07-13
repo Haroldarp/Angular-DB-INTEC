@@ -10,7 +10,6 @@ import {
 } from '@ngrx/store';
 import {UserInfo} from '../models/userInfo';
 import {Reservation} from '../models/reservation';
-import {Reserva} from '../models/reserva';
 import { environment } from '../../environments/environment';
 import * as userActions from './user-state.actions';
 import {EntityState, EntityAdapter, createEntityAdapter} from '@ngrx/entity'

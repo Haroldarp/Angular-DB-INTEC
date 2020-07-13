@@ -129,7 +129,6 @@ export class ReservationComponent implements OnInit {
 
       if(state.ok){
         $(div).addClass('reserving').removeClass('free');
-        //cualquier vaina coge to lo div y quitale el reserving class
 
       }else{
         console.log(state.errorMessage);
@@ -159,22 +158,8 @@ export class ReservationComponent implements OnInit {
   }
 
   agregarMatricula(){
-    // this._peticionesSevice.verifyUserExists(this.matricula).subscribe(
-    //   result =>{
-    //     if(result.Ok){
-          this.currentReservation.group.push(this.matricula);
-          this.matricula = '';
-    //       this.noExiste = false;
-
-    //     }else{
-    //       this.noExiste = true;
-    //     }
-
-    //   },
-    //   error =>{
-    //     console.log(error);
-    //   }
-    // )
+    this.currentReservation.group.push(this.matricula);
+    this.matricula = '';
 
   }
 

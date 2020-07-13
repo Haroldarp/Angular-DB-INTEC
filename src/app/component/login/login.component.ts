@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl , FormGroup, FormBuilder, Validator, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {UserValidator} from '../../validators/login.validator'
 import {Store} from '@ngrx/store';
 import {userState} from '../../store/index';
 import {PeticionesService} from '../../services/peticiones.service';
 import * as userActions from '../../store/user-state.actions';
-import { User } from 'src/app/models/user';
 import { UserInfo } from 'src/app/models/userInfo';
 
 @Component({

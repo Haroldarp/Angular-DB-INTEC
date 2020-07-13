@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Reservation} from '../../models/reservation';
 import {ReservationService} from '../../services/reservation.service';
 import {PeticionesService} from '../../services/peticiones.service';
-import {StoreService} from '../../services/Strore.service';
 import {Store, select} from '@ngrx/store';
 import {userState, selectAll, getCurrentDeleteGroup, getCurrentDeleteReservation, selectUserId} from '../../store/index';
 import * as userActions from '../../store/user-state.actions';
@@ -13,7 +12,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-my-reservation',
   templateUrl: './my-reservation.component.html',
   styleUrls: ['./my-reservation.component.css'],
-  providers: [ReservationService, PeticionesService, StoreService]
+  providers: [ReservationService, PeticionesService]
 })
 export class MyReservationComponent implements OnInit {
 
@@ -33,7 +32,6 @@ export class MyReservationComponent implements OnInit {
     private _modalService: NgbModal,
     private _reservationService: ReservationService,
     private _peticionesService: PeticionesService,
-    private _storeService: StoreService,
     private store:Store<userState>
 
   ) { }
@@ -189,22 +187,5 @@ export class MyReservationComponent implements OnInit {
       }
     );
   }
-
-
-  // groupByBuilding(entity, property){
-  //   let group = entity.reduce((entity, property) => {
-  //     entity[property.building] = [...entity[property.building] || [], property];
-  //     return entity;
-  //    }, {});
-
-  //    var prop = Object.getOwnPropertyNames(group);
-  //    var grouped = [];
-  //    prop.forEach(item =>{
-  //     grouped.push( {code: item, reservations: group[item]});
-  //    })
-
-  //    return grouped;
-  // }
-
 
 }

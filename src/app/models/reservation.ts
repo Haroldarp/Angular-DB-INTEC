@@ -16,10 +16,4 @@ export interface Reservation{
     endTime:number;
     group?: string[];
 
-    // constructor(day:string, limit:number, counterHours:number){
-    //     this.day = day;
-    //     this.limit = limit;
-    //     this.counterHours = counterHours;
-    //     this.intervals = {iniTime: null, endTime: null};
-    // }
 }

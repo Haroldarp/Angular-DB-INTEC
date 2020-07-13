@@ -13,7 +13,6 @@ import { AvailableNowComponent } from './component/available-now/available-now.c
 import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { MyReservationComponent } from './component/my-reservation/my-reservation.component';
 import { ReservationCardsComponent } from './component/reservation-cards/reservation-cards.component';
-import { ProbarPeticionesComponent } from './component/probar-peticiones/probar-peticiones.component';
 
 
 
@@ -33,7 +32,7 @@ const appRoutes: Routes = [
 
   {path:'login', component:LoginComponent},
   {path:'sign-up', component:SignUpComponent},
-  {path:'**', component: ProbarPeticionesComponent}
+  {path:'**', component: HomePageComponent}
 ];
 
 

@@ -63,20 +63,4 @@ export class ReservationCardsComponent implements OnInit {
     )
   }
 
-
-  // showVerification( userReservation ){
-  //   if(userReservation){
-  //     this.verificationMessage = "Estas seguro que quieres descartar esta Reservacion?"
-  //   }else{
-  //     this.verificationMessage = "Estas seguro que quieres salir de este grupo?"
-  //   }
-
-  //   this._modalService.open(modal, { centered: true });
-  // }
-
-  // showErrorModal(modal, errorMessage){
-  //   this.modalErrorMessage = errorMessage;
-  //   this._modalService.open(modal, { centered: true });
-  // }
-
 }

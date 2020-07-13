@@ -24,15 +24,12 @@ import { ReservationCardsComponent } from './component/reservation-cards/reserva
 import {DateService} from './services/date.service';
 import {PeticionesService} from './services/peticiones.service';
 import {ReservationService} from './services/reservation.service';
-import {StoreService} from './services/Strore.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './reducers';
 import * as fromUserState from './store';
-import { UserStateEffects } from './store/user-state.effects';
-import { ProbarPeticionesComponent } from './component/probar-peticiones/probar-peticiones.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +44,7 @@ import { ProbarPeticionesComponent } from './component/probar-peticiones/probar-
     AvailableNowComponent,
     SignUpComponent,
     MyReservationComponent,
-    ReservationCardsComponent,
-    ProbarPeticionesComponent
+    ReservationCardsComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +57,6 @@ import { ProbarPeticionesComponent } from './component/probar-peticiones/probar-
     
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([UserStateEffects]),
     StoreModule.forRoot(reducers, {
       metaReducers, 
       runtimeChecks: {
@@ -77,7 +72,6 @@ import { ProbarPeticionesComponent } from './component/probar-peticiones/probar-
     DateService,
     PeticionesService,
     ReservationService,
-    StoreService
   ],
   bootstrap: [AppComponent]
 })
