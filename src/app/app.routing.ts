@@ -13,6 +13,7 @@ import { AvailableNowComponent } from './component/available-now/available-now.c
 import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { MyReservationComponent } from './component/my-reservation/my-reservation.component';
 import { ReservationCardsComponent } from './component/reservation-cards/reservation-cards.component';
+import { ProbarPeticionesComponent } from './component/probar-peticiones/probar-peticiones.component';
 
 
 
@@ -24,15 +25,15 @@ const appRoutes: Routes = [
     {path:'', redirectTo: '/home/edificios', pathMatch: 'full'},
     {path:'disponible-ahora', component:AvailableNowComponent},
     {path:'edificios', component:BuildingComponent},
-    {path:'curso/:building', component:CoursesViewComponent},
-    {path:'reserva/:course', component:ReservationComponent},
+    {path:'curso/:name/:idBuilding', component:CoursesViewComponent},
+    {path:'reserva/:courseName/:idCourse', component:ReservationComponent},
     {path:'my-reservation', component:MyReservationComponent},
     {path:'reservation-cards', component:ReservationCardsComponent},
   ]},
 
   {path:'login', component:LoginComponent},
   {path:'sign-up', component:SignUpComponent},
-  {path:'**', component: LoginComponent}
+  {path:'**', component: ProbarPeticionesComponent}
 ];
 
 

@@ -10,6 +10,7 @@ import {
 } from '@ngrx/store';
 import {UserInfo} from '../models/userInfo';
 import {Reservation} from '../models/reservation';
+import {Reserva} from '../models/reserva';
 import { environment } from '../../environments/environment';
 import * as userActions from './user-state.actions';
 import {EntityState, EntityAdapter, createEntityAdapter} from '@ngrx/entity'
@@ -156,6 +157,11 @@ export const getCurrentDeleteReservation = createSelector(
 export const getCurrentDeleteGroup = createSelector(
   selectorsKey,
   (state: userState) => state.currentDeleteGroup
+)
+
+export const selectUserId = createSelector(
+  selectorsKey,
+  (state: userState) => state.user.ids
 )
 
 

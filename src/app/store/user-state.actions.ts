@@ -1,10 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import {UserInfo} from '../models/userInfo';
 import {Reservation} from '../models/reservation';
+import {Reserva} from '../models/reserva';
 
 //user
 export const loadUser = createAction(
-  '[User login] Load User'
+  '[User login] Load User',
+  props<{ userId: number }>()
+
 );
 
 export const loadUserSuccess = createAction(

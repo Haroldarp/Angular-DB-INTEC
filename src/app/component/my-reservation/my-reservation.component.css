@@ -12,3 +12,27 @@
 .my-groups-container{
     margin-top: 100px;
 }
+
+.btn-custom1{
+    background-color: red;
+    color: white;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+
+}
+
+.btn-custom1:hover{
+    background-color: white;
+    color: red;
+}
+
+.btn-custom2{
+    background-color: #007BFF;
+    color: white;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+
+}
+
+.btn-custom2:hover{
+    background-color: white;
+    color: #007BFF;
+}

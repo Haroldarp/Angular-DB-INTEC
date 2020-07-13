@@ -90,6 +90,11 @@
 
 }
 
+.btn-custom1:hover{
+    background-color: white;
+    color: red;
+}
+
 .error{
     font-weight: bold;
     color: red;

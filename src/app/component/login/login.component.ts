@@ -4,12 +4,16 @@ import {Router} from '@angular/router';
 import {UserValidator} from '../../validators/login.validator'
 import {Store} from '@ngrx/store';
 import {userState} from '../../store/index';
+import {PeticionesService} from '../../services/peticiones.service';
 import * as userActions from '../../store/user-state.actions';
+import { User } from 'src/app/models/user';
+import { UserInfo } from 'src/app/models/userInfo';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [PeticionesService]
 })
 export class LoginComponent implements OnInit {
 
@@ -19,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private _router: Router,
+    private _peticionesSevice: PeticionesService,
     private store:Store<userState>
 
     ) {
@@ -26,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.form = formBuilder.group({
       username: new FormControl('',{validators: Validators.required}),
       password: new FormControl('',{validators: Validators.required})
-    },{validators: UserValidator});
+    });
 
   }
 
@@ -38,14 +43,48 @@ export class LoginComponent implements OnInit {
   }
 
   onSumit(){
-    if(this.form.valid){
-      this.store.dispatch(userActions.loadUser());
-      this._router.navigate([`home/edificios`]);
 
-   }else if(this.form.errors?.validUser){
-      this.validUser = false;
-      console.log('no valido');
+    const {username , password} = this.form.value;
+    console.log(username);
+    console.log(password);
+
+    if(this.form.valid){
+      this._peticionesSevice.login( username ,password).subscribe(
+        result =>{
+          if(result.Ok){
+            this._router.navigate([`home/edificios`]);
+            this.loadUser(username);
+
+          }else{
+            this.validUser = false;
+          }
+        },
+        error =>{
+          console.log(error);
+        }
+      );
     }
+  }
+
+
+  loadUser(username){
+    this._peticionesSevice.getUserById(username).subscribe(
+      result =>{
+        if(result[0].Ok){
+          var user:UserInfo = {id:result[1][0].idPersona , Nombre:result[1][0].Nombre}
+
+          this.store.dispatch(userActions.loadUserSuccess({user: user}));
+        }else{
+          console.log(result);
+          this.store.dispatch(userActions.loadUserFailure({error: result}));
+        }
+      },
+      error =>{
+        console.log(error);
+        this.store.dispatch(userActions.loadUserFailure({error: error}));
+
+      }
+    )
   }
 
 }

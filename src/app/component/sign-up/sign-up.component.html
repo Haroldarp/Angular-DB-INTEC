@@ -69,6 +69,14 @@
                     </div>
 
                 </div>
+
+                <div *ngIf= "noValido" 
+                class="row justify-content-center text-center error">
+                    <div>
+                        {{errorMessage}}
+                    </div>
+                </div>
+
                 
                 <div class = "form-row mt-3 justify-content-center">
                     <button type="submit" style="background-color: red; color: white;" 

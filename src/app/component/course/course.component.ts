@@ -22,7 +22,8 @@ export class CourseComponent implements OnInit {
   }
 
   onClick(event:any){
-    this._router.navigate([`home/reserva/${event.currentTarget.id}`]);
+    var ids = event.currentTarget.id.split("-");
+    this._router.navigate([`home/reserva/${ids[1]}/${ids[0]}`]);
   }
 
 }

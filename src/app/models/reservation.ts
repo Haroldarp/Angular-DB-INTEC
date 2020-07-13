@@ -1,9 +1,12 @@
 export interface Reservation{
 
     id?:number;
+    idReservationGroup?: number; 
+    idReservation?: number; 
     limit?:number;
     building?:string;
     course?: string;
+    idCourse?: number;
     counterHours?:number;
     day?:number;
     week?:number;

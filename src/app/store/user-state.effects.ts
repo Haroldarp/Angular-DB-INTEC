@@ -13,8 +13,8 @@ export class UserStateEffects {
 
   loadUser$ = createEffect(() => this.actions$.pipe(
     ofType(userActions.loadUser),
-    mergeMap(() => 
-    this._peticionesService.getUser().pipe(
+    mergeMap(action => 
+    this._peticionesService.getUserById(action.userId).pipe(
         map(user => userActions.loadUserSuccess({user})),
         catchError(error => of(userActions.loadUserFailure({error})))
       ))

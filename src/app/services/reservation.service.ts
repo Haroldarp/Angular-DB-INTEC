@@ -20,7 +20,7 @@ export class ReservationService{
         if(date != reservation.date)
             return {ok:false, errorMessage:'Las horas de la reservacion deben pertenece al mismo dia'};
 
-        if(reservation.counterHours >= 5)
+        if(reservation.counterHours >= 2)
             return {ok:false, errorMessage:'Se llego al limite de horas a reservar en una sola reserva'};
 
             

@@ -48,6 +48,18 @@ export class DateService{
 
     }
 
+    getCurrentWeek():number{
+
+        var startDate:any = new Date("2020-7-1");
+        var now:any = new Date();
+        const timeDiff = Math.abs(startDate - now);
+        const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
+
+        var week = Math.ceil(((daysDiff - (7-this.getDayIndex(startDate)) )/7)+1);
+
+        return week;
+    }
+
     getDayString(index:number){
         switch (index) {
             case 0:

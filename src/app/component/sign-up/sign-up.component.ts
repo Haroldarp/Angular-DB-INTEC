@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl , FormGroup, FormBuilder, Validator, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ComfirmPassword} from '../../validators/sing-up.validator'
+import {ComfirmPassword} from '../../validators/sing-up.validator';
+import {PeticionesService} from '../../services/peticiones.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+  providers: [PeticionesService]
 })
 export class SignUpComponent implements OnInit {
 
   public form:any;
+  public errorMessage: string;
+  public noValido: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    private _peticionesService: PeticionesService
   ) {
     this.form = formBuilder.group({
       username: new FormControl('',{validators: Validators.required}),
@@ -24,16 +29,53 @@ export class SignUpComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    this.noValido = false;
+    this.errorMessage = "";
   }
 
   onSumit(){
-    if(this.form.valid){
-      this._router.navigate([`/login`]);
 
-    }else{
-      console.log('no valido');
+    const {username , password, comfirmPassword} = this.form.value;
+
+    if(this.form.valid){
+      this._peticionesService.verifyUserExists(username).subscribe(
+        result => {
+          if(result.Ok){
+            this.registrarUsuario(username, password);
+
+          }else{
+            this.errorMessage = "Esta Matricula no esta registrada en la Universidad";
+            this.noValido = true;
+          }
+
+        },
+        error =>{
+          console.log(error);
+        }
+      )
+
     }
+
+  }
+
+
+  registrarUsuario(username, pass){
+    this._peticionesService.registerUser(username, pass).subscribe(
+      result =>{
+        if(result.Ok){
+          this._router.navigate([`/login`]);
+
+        }else{
+          this.errorMessage = "Esta Matricula ya esta registrada en la App";
+          this.noValido = true;
+
+        }
+
+      },
+      error =>{
+        console.log(error);
+      }
+    )
   }
 
 }

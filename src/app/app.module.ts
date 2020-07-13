@@ -24,6 +24,7 @@ import { ReservationCardsComponent } from './component/reservation-cards/reserva
 import {DateService} from './services/date.service';
 import {PeticionesService} from './services/peticiones.service';
 import {ReservationService} from './services/reservation.service';
+import {StoreService} from './services/Strore.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
@@ -31,6 +32,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './reducers';
 import * as fromUserState from './store';
 import { UserStateEffects } from './store/user-state.effects';
+import { ProbarPeticionesComponent } from './component/probar-peticiones/probar-peticiones.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { UserStateEffects } from './store/user-state.effects';
     AvailableNowComponent,
     SignUpComponent,
     MyReservationComponent,
-    ReservationCardsComponent
+    ReservationCardsComponent,
+    ProbarPeticionesComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { UserStateEffects } from './store/user-state.effects';
     appRoutingProviders,
     DateService,
     PeticionesService,
-    ReservationService
+    ReservationService,
+    StoreService
   ],
   bootstrap: [AppComponent]
 })

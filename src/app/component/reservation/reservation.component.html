@@ -43,8 +43,8 @@
                      [ngClass]="{
                         'free': (item == 0 && !datePassed(getDate(dayIndex,currentReservation.week),hours[hourIndex])),
                         'reserve-imposible': (item == 0 && datePassed(getDate(dayIndex,currentReservation.week),hours[hourIndex])),
-                        'class': item == 1,
-                        'reserved': item == 2}">
+                        'class': item == 2,
+                        'reserved': item == 1}">
                     </div>
 
                 </div>
@@ -66,7 +66,7 @@
 
 
 <ng-template #errorModal let-modal>
-  <div class="modal-header">
+  <div class="modal-header border-bottom-0">
     <h5 class="modal-title" id="exampleModalLabel">AVISO!</h5>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -101,7 +101,11 @@
           </div>
           <div *ngIf= "currentReservation.group.length < minPeople" 
                 class="row col-md-12 mx-0 justify-content-center text-center error">
-                    Necesita minimo {{minPeople}}
+                   Minimo {{minPeople}}
+          </div>
+          <div *ngIf= "noExiste" 
+                class="row col-md-12 mx-0 justify-content-center text-center error">
+                  Matricula no registrada en Intec
           </div>
           <div class="form-row col-md-12 justify-content-center align-items-center mt-2 mx-0">
             <div class="col-md-5">

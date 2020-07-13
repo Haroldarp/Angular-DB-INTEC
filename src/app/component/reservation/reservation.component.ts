@@ -3,10 +3,11 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Schedule} from '../../models/schedule';
 import {Reservation} from '../../models/reservation';
 import {ReservationService} from '../../services/reservation.service';
+import {PeticionesService} from '../../services/peticiones.service';
 import {DateService} from '../../services/date.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Store, select} from '@ngrx/store';
-import {userState, selectAll} from '../../store/index';
+import {userState, selectAll, selectUserId} from '../../store/index';
 import * as userActions from '../../store/user-state.actions';
 import * as $ from 'jquery';
 
@@ -14,7 +15,7 @@ import * as $ from 'jquery';
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css'],
-  providers: [ReservationService, DateService]
+  providers: [ReservationService, DateService, PeticionesService]
 })
 export class ReservationComponent implements OnInit {
 
@@ -23,6 +24,8 @@ export class ReservationComponent implements OnInit {
 
   matricula:string;
   minPeople:number;
+  public userId: number | string; 
+
 
   public currentReservation: Reservation;
 
@@ -33,13 +36,14 @@ export class ReservationComponent implements OnInit {
   public reservationGroups:Reservation[];
 
   public modalErrorMessage:string;
-
+  public noExiste;
 
   constructor(
     private _route: ActivatedRoute,
     private _reservationService: ReservationService,
     private _dateService: DateService,
     private _modalService: NgbModal,
+    private _peticionesSevice: PeticionesService,
     private store:Store<userState>
 
   ){
@@ -49,51 +53,60 @@ export class ReservationComponent implements OnInit {
   ngOnInit(): void {
 
     this.matricula ="";
+    this.noExiste = false;
 
-    this.currentReservation = {course: null,
-      iniTime: null, endTime: null, 
-      week:1, day:null, date: null, 
-      group: [], limit: 2, counterHours: 0}
-
-    this._route.params.subscribe((params:Params)=>{
-      this.currentReservation.course = params.course;
+    this.userId = 0;
+    this.store.pipe(select(selectUserId)).subscribe( state =>{
+      this.userId = state[0];
     });
 
+    this.reservations = [];
+    this.reservationGroups = [];
 
-    this.store.dispatch(userActions.loadReservations());
-    this.store.dispatch(userActions.loadGroups());
+    this.loadReservations();
+    this.loadGroups();
 
     this.store.pipe(select(selectAll)).subscribe(state =>{
       this.reservations = this._reservationService.transformEntity(state.userReservation.entities);
       this.reservationGroups = this._reservationService.transformEntity(state.userGroupReservation.entities);
     });
 
-    this.minPeople = 4;
+    this.currentReservation = {course: null, idCourse : null,
+      iniTime: null, endTime: null, 
+      week:1, day:null, date: null, 
+      group: [], counterHours: 0}
+
+    this._route.params.subscribe((params:Params)=>{
+      this.currentReservation.course = params.courseName;
+      this.currentReservation.idCourse = params.idCourse;
+    });
+
+    this.currentReservation.week = this._dateService.getCurrentWeek();
+
+    
+
+    this.minPeople = 3;
     
     console.log(this.reservations);
     console.log(this.reservationGroups);
 
 
     this.hours = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
-
-    this.schedule = [
-      new Schedule("Lunes",[0,0,1,1,1,1,2,2,2,1,1,1,1,0,0]),
-      new Schedule("Martes",[1,1,1,1,1,1,0,0,0,2,2,1,1,1,1]),
-      new Schedule("Miercoles",[2,2,0,0,0,0,2,1,1,1,1,1,1,1,1]),
-      new Schedule("Jueves",[1,1,2,2,2,2,0,0,0,0,0,0,1,1,1]),
-      new Schedule("Viernes",[0,0,1,1,1,1,2,2,2,1,1,1,1,0,0]),
-      new Schedule("Sabado",[1,1,1,1,1,1,0,0,0,2,2,1,1,1,1]),
-      new Schedule("Domingo",[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-    ]
+    this.loadSchedule();
 
   }
+
 
   onArrowClick(event:any){
     if(event.currentTarget.id == 'left' && this.currentReservation.week > 1){
       this.currentReservation.week--;
+      this.loadSchedule();
+
 
     }else if(event.currentTarget.id == 'right' && this.currentReservation.week < 12){
       this.currentReservation.week++;
+      this.loadSchedule();
+
 
     }
   }
@@ -111,6 +124,7 @@ export class ReservationComponent implements OnInit {
 
       if(state.ok){
         $(div).addClass('reserving').removeClass('free');
+        //cualquier vaina coge to lo div y quitale el reserving class
 
       }else{
         console.log(state.errorMessage);
@@ -140,8 +154,23 @@ export class ReservationComponent implements OnInit {
   }
 
   agregarMatricula(){
-    this.currentReservation.group.push(this.matricula);
-    this.matricula = '';
+    this._peticionesSevice.verifyUserExists(this.matricula).subscribe(
+      result =>{
+        if(result.Ok){
+          this.currentReservation.group.push(this.matricula);
+          this.matricula = '';
+          this.noExiste = false;
+
+        }else{
+          this.noExiste = true;
+        }
+
+      },
+      error =>{
+        console.log(error);
+      }
+    )
+
   }
 
   showErrorModal(modal, errorMessage){
@@ -150,13 +179,26 @@ export class ReservationComponent implements OnInit {
   }
 
   showSendReservationModal(){
-    //verifica que exixte
     this._modalService.open(this.sendReservationModal, { centered: true })
   }
 
   sendReservation(){
-    this.currentReservation.day = this._reservationService.getDayIndex(this.currentReservation.date);
-    console.log(this.currentReservation);
+    this.currentReservation.day = this._reservationService.getDayIndex(this.currentReservation.date) + 1;
+
+    this._peticionesSevice.addReserva(this.currentReservation).subscribe(
+      result => {
+        if(result.Ok){
+          this._modalService.dismissAll();
+          this.showErrorModal(this.errorModal, "La reserva se guardo con exito!!!!!");
+          this.loadSchedule();
+        }
+      },
+      error =>{
+        console.log(error);
+      }
+    );
+
+
   }
 
   getDate(day:number, week:number){
@@ -165,6 +207,86 @@ export class ReservationComponent implements OnInit {
 
   datePassed(date:string, hour:number){
     return this._dateService.datePassed(date, hour);
+  }
+
+
+  loadSchedule(){
+    this._peticionesSevice.getHorario(this.currentReservation.idCourse,this.currentReservation.week).subscribe(
+      result =>{
+        if(result[0].Ok){
+          this.schedule = [
+            new Schedule("Lunes",result[1][0]),
+            new Schedule("Martes",result[1][1]),
+            new Schedule("Miercoles",result[1][2]),
+            new Schedule("Jueves",result[1][3]),
+            new Schedule("Viernes",result[1][4]),
+            new Schedule("Sabado",result[1][5]),
+            new Schedule("Domingo",result[1][6]),
+          ]
+        }
+      },
+      error =>{
+        console.log(error);
+      }
+    )
+  }
+
+  loadReservations(){
+    this._peticionesSevice.getReservas(1).subscribe(
+      result =>{
+        console.log(result);
+
+        if(result[0].Ok){
+
+          result[1].forEach(element => {
+
+            this.reservations.push({id: element.idReserva, course: element.idCurso,
+              date: element.FechaReserva.split("T")[0], iniTime: element.idHoraIn, 
+              endTime: element.idHoraF , week: element.idSemana, day: element.idDias- 1 });
+          });
+
+          this.store.dispatch(userActions.loadReservationsSuccess({Reservations: this.reservations}));
+
+          console.log(this.reservations);
+
+        }else{
+          this.store.dispatch(userActions.loadReservationsFailure({error: result}));
+
+        }
+
+      },
+      error =>{
+        this.store.dispatch(userActions.loadReservationsFailure({error: error}));
+      }
+    );
+  }
+
+  loadGroups(){
+    this._peticionesSevice.getReservaGrupo(this.userId).subscribe(
+      result =>{
+        if(result[0].Ok){
+
+          result[1].forEach(element => {
+            
+            this.reservationGroups.push({id:  element.idGrupoReserva, idReservation: element.idReserva , 
+              course: element.idCurso,
+              date: element.FechaReserva.split("T")[0], iniTime: element.idHoraIn, 
+              endTime: element.idHoraF , week: element.idSemana, day: element.idDias- 1 });
+            });
+
+          this.store.dispatch(userActions.loadGroupsSuccess({Groups: this.reservationGroups}));
+
+        }else{
+          this.store.dispatch(userActions.loadGroupsFailure({error: result}));
+
+        }
+
+      },
+      error =>{
+        this.store.dispatch(userActions.loadGroupsFailure({error: error}));
+
+      }
+    );
   }
 
 }

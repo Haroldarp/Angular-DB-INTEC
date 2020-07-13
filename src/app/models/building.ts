@@ -1,7 +1,10 @@
+import {Course} from './courses';
+
 export interface Building{
 
-    name?:string;
-    code:String;
-    courses?:Array<string>;
+    idEdificio?: number;
+    Edificio?: string;
+    Nombre?:string;
+    courses?:Course;
 
 }

@@ -46,7 +46,7 @@
 </div>
 
 <ng-template #verificationModal let-modal>
-  <div class="modal-header">
+  <div class="modal-header border-bottom-0">
     <h5 class="modal-title" id="exampleModalLabel">CONFIRMACION!</h5>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -58,11 +58,13 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-custom" ngbAutofocus (click)="modal.close('Close click')">cancelar</button>
-    <button *ngIf = "isUserReservation" type="button" class="btn btn-custom"  (click)="deleteReservation()">
+    <button type="button" class="btn btn-custom2"  (click)="modal.close('Close click')">cancelar</button>
+    <button *ngIf = "isUserReservation" type="button" class="btn btn-custom1"  ngbAutofocus
+    (click)="deleteReservation()">
         Borrar
     </button>
-    <button *ngIf = "!isUserReservation" type="button" class="btn btn-custom"  (click)="deleteGroup()">
+    <button *ngIf = "!isUserReservation" type="button" class="btn btn-custom1"  ngbAutofocus
+    (click)="deleteGroup()">
         Borrar
     </button>
   </div>
