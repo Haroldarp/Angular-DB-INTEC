@@ -60,6 +60,11 @@ export class ReservationComponent implements OnInit {
       this.userId = state[0];
     });
 
+    if(this.userId == undefined){
+      this.userId = Number.parseInt(localStorage.getItem('id'));
+    }
+
+
     this.reservations = [];
     this.reservationGroups = [];
 
@@ -74,7 +79,7 @@ export class ReservationComponent implements OnInit {
     this.currentReservation = {course: null, idCourse : null,
       iniTime: null, endTime: null, 
       week:1, day:null, date: null, 
-      group: [], counterHours: 0}
+      group: [], counterHours: 0 , idReservante: this.userId}
 
     this._route.params.subscribe((params:Params)=>{
       this.currentReservation.course = params.courseName;
@@ -154,22 +159,22 @@ export class ReservationComponent implements OnInit {
   }
 
   agregarMatricula(){
-    this._peticionesSevice.verifyUserExists(this.matricula).subscribe(
-      result =>{
-        if(result.Ok){
+    // this._peticionesSevice.verifyUserExists(this.matricula).subscribe(
+    //   result =>{
+    //     if(result.Ok){
           this.currentReservation.group.push(this.matricula);
           this.matricula = '';
-          this.noExiste = false;
+    //       this.noExiste = false;
 
-        }else{
-          this.noExiste = true;
-        }
+    //     }else{
+    //       this.noExiste = true;
+    //     }
 
-      },
-      error =>{
-        console.log(error);
-      }
-    )
+    //   },
+    //   error =>{
+    //     console.log(error);
+    //   }
+    // )
 
   }
 
@@ -184,7 +189,6 @@ export class ReservationComponent implements OnInit {
 
   sendReservation(){
     this.currentReservation.day = this._reservationService.getDayIndex(this.currentReservation.date) + 1;
-
     this._peticionesSevice.addReserva(this.currentReservation).subscribe(
       result => {
         if(result.Ok){
@@ -232,7 +236,7 @@ export class ReservationComponent implements OnInit {
   }
 
   loadReservations(){
-    this._peticionesSevice.getReservas(1).subscribe(
+    this._peticionesSevice.getReservas(this.userId).subscribe(
       result =>{
         console.log(result);
 

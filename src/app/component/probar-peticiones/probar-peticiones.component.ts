@@ -59,7 +59,7 @@ export class ProbarPeticionesComponent implements OnInit {
 
   //no funciona
   getCursoDisponible(){
-    this._peticionesSevice.getCursoDisponible().subscribe(
+    this._peticionesSevice.getCursoDisponible(8,1,1).subscribe(
       result =>{
         console.log(result);
 
@@ -203,6 +203,30 @@ export class ProbarPeticionesComponent implements OnInit {
 
   salirGrupo(){
     this._peticionesSevice.salirGrupo(25).subscribe(
+      result =>{
+        console.log(result);
+
+      },
+      error =>{
+
+      }
+    )
+  }
+
+  getCursoEdificio(){
+    this._peticionesSevice.getCursoEdificio(48).subscribe(
+      result =>{
+        console.log(result);
+
+      },
+      error =>{
+
+      }
+    )
+  }
+
+  VerifyPersonaExists(){
+    this._peticionesSevice.getCursoEdificio(1090002).subscribe(
       result =>{
         console.log(result);
 

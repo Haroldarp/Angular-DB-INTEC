@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
       result =>{
         if(result[0].Ok){
           var user:UserInfo = {id:result[1][0].idPersona , Nombre:result[1][0].Nombre}
+          localStorage.setItem('id', user.id.toString());
 
           this.store.dispatch(userActions.loadUserSuccess({user: user}));
         }else{

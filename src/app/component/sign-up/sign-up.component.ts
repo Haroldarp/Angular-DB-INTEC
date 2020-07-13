@@ -38,22 +38,7 @@ export class SignUpComponent implements OnInit {
     const {username , password, comfirmPassword} = this.form.value;
 
     if(this.form.valid){
-      this._peticionesService.verifyUserExists(username).subscribe(
-        result => {
-          if(result.Ok){
-            this.registrarUsuario(username, password);
-
-          }else{
-            this.errorMessage = "Esta Matricula no esta registrada en la Universidad";
-            this.noValido = true;
-          }
-
-        },
-        error =>{
-          console.log(error);
-        }
-      )
-
+        this.registrarUsuario(username, password);
     }
 
   }

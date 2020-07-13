@@ -3,6 +3,7 @@ export interface Reservation{
     id?:number;
     idReservationGroup?: number; 
     idReservation?: number; 
+    idReservante?: number; 
     limit?:number;
     building?:string;
     course?: string;

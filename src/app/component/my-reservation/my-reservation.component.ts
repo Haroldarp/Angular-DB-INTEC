@@ -44,6 +44,10 @@ export class MyReservationComponent implements OnInit {
     this.store.pipe(select(selectUserId)).subscribe( state =>{
       this.userId = state[0];
     });
+
+    if(this.userId == undefined){
+      this.userId = Number.parseInt(localStorage.getItem('id'));
+    }
     
     this.myReservations = [];
     this.myGroups = [];
@@ -75,7 +79,7 @@ export class MyReservationComponent implements OnInit {
   }
 
 
-
+  
 
 
   deleteReservation(){
@@ -129,7 +133,7 @@ export class MyReservationComponent implements OnInit {
   }
 
   loadReservations(){
-    this._peticionesService.getReservas(1).subscribe(
+    this._peticionesService.getReservas(this.userId).subscribe(
       result =>{
         console.log(result);
 
@@ -185,7 +189,6 @@ export class MyReservationComponent implements OnInit {
       }
     );
   }
-
 
 
   // groupByBuilding(entity, property){

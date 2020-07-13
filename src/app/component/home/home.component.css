@@ -8,9 +8,10 @@
 
 .navbar{
     /* background-color: #F5F5F5; */
+    /* box-shadow: 0.5px 0.5px 2.5px 2.5px #C9C9C9; */
+
     background-color: white;
     box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
-    /* box-shadow: 0.5px 0.5px 2.5px 2.5px #C9C9C9; */
 }
 
 .btn-custom{

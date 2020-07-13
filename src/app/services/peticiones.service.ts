@@ -73,11 +73,12 @@ export class PeticionesService{
         return this._http.get(`${this.url}Reserva/GetSemana/${idSemana}`, { params });
     }
 
-    getCursoDisponible():Observable<any>{
+    //en uso
+    getCursoDisponible(idHora, idSemana, idDia):Observable<any>{
         let params = new HttpParams()
-        .set('idSemana', '1')
-        .set('idDia', '1')
-        .set('idHora', '8');
+        .set('idSemana', idSemana)
+        .set('idDia', idDia)
+        .set('idHora', idHora);
 
         return this._http.get(`${this.url}Edificio/GetCursosDisponibles`, { params });
     }
@@ -141,7 +142,7 @@ export class PeticionesService{
     addReserva(reservaInfo:Reservation):Observable<any>{
         let reserva = {
             Reserva: {
-                idReservante: 1,
+                idReservante: reservaInfo.idReservante,
                 idCurso: reservaInfo.idCourse,
                 idSemana: reservaInfo.week,
                 idDia: reservaInfo.day,
@@ -182,5 +183,15 @@ export class PeticionesService{
         .set('Content-Type','application/json');
 
         return this._http.put(`${this.url}Reserva/SalirGrupoReserva/${idGrupoReserva}` ,{headers: headers} );
+    }
+
+    getCursoEdificio(idCurso):Observable<any>{
+        
+        return this._http.get(`${this.url}Edificio/GetCursoEdificio/${idCurso}`);
+    }
+
+    VerifyPersonaExists(idPersona):Observable<any>{
+        
+        return this._http.get(`${this.url}Edificio/GetCursoEdificio/${idPersona}`);
     }
 }

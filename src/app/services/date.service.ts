@@ -48,6 +48,16 @@ export class DateService{
 
     }
 
+    getCurrentHour():number{
+        var now = new Date();
+        return now.getHours();
+    }
+
+    getCurrentDay(){
+        var now = new Date();
+        return this.getDayIndex(now) + 1;
+    }
+
     getCurrentWeek():number{
 
         var startDate:any = new Date("2020-7-1");
